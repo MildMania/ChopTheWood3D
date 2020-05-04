@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(Thrower))]
@@ -9,8 +7,11 @@ public class ThrowerEditor : Editor
     [DrawGizmo(GizmoType.Selected | GizmoType.Active | GizmoType.NonSelected)]
     static void DrawGizmo(Thrower t, GizmoType gizmoType)
     {
-        DrawThrowPath(t);
-        EditThrowableTransform(t);
+        if(t.ShowSimulation)
+            DrawThrowPath(t);
+
+        if(!Application.isPlaying)
+            SetThrowableTransform(t);
     }
 
     private static void DrawThrowPath(Thrower t)
@@ -30,11 +31,11 @@ public class ThrowerEditor : Editor
             curTime += step;
         }
 
-        Handles.color = Color.red;
+        Handles.color = t.HandleColor;
         Handles.DrawPolyLine(pointArr);
     }
 
-    private static void EditThrowableTransform(Thrower t)
+    private static void SetThrowableTransform(Thrower t)
     {
         float time = t.SimulateTime;
 

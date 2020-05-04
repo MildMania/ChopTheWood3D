@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ThrowerController : MonoBehaviour
 {
-    [SerializeField] [Range(10, 50)] private int _resolution;
 
     [SerializeField] private Thrower[] _throwers;
     public Thrower[] Throwers
@@ -15,8 +12,8 @@ public class ThrowerController : MonoBehaviour
         }
     }
 
-    [SerializeField] private float _showSimulation;
-    public float ShowSimulation
+    [SerializeField] private bool _showSimulation;
+    public bool ShowSimulation
     {
         get
         {
@@ -24,4 +21,41 @@ public class ThrowerController : MonoBehaviour
         }
     }
 
+    [SerializeField] private float _simulateTime;
+    public float SimulateTime
+    {
+        get
+        {
+            return _simulateTime;
+        }
+    }
+
+    [SerializeField] private float _simulateDuration;
+    public float SimulateDuration
+    {
+        get
+        {
+            return _simulateDuration;
+        }
+    }
+
+    [SerializeField] [Range(10, 50)] private int _resolution;
+    public int Resolution
+    {
+        get
+        {
+            return _resolution;
+        }
+    }
+
+    private void Awake()
+    {
+        ActivateThrowers();
+    }
+
+    private void ActivateThrowers()
+    {
+        foreach (Thrower t in _throwers)
+            t.Throw();
+    }
 }

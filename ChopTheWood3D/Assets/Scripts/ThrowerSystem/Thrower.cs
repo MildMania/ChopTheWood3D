@@ -23,40 +23,94 @@ public class Thrower : MonoBehaviour
 
     [SerializeField] private float _angularVelocity;
 
-    [SerializeField] private float _simulateTime;
+    [SerializeField] private float _throwDelay;
+
+    [SerializeField] private Color _handleColor = Color.red;
+    public Color HandleColor
+    {
+        get
+        {
+            return _handleColor;
+        }
+    }
+
+    [SerializeField][HideInInspector] private bool _showSimulation;
+    public bool ShowSimulation
+    {
+        get
+        {
+            return _showSimulation;
+        }
+        set
+        {
+            _showSimulation = value;
+        }
+    }
+
+    [SerializeField] [HideInInspector] private float _simulateDuration;
+
+    public float SimulateDuration
+    {
+        get
+        {
+            return _simulateDuration;
+        }
+        set
+        {
+            _simulateDuration = value;
+        }
+    }
+
+    [SerializeField] [HideInInspector] private float _simulateTime;
     public float SimulateTime
     {
         get
         {
             return _simulateTime;
         }
+        set
+        {
+            _simulateTime = value;
+        }
     }
 
-    public float SimulateDuration { get; set; }
 
-    [SerializeField][Range(10, 50)] private int _resolution;
-    public int Resolution { get; set; }
+    [SerializeField] [HideInInspector] private int _resolution;
+    public int Resolution
+    {
+        get
+        {
+            return _resolution;
+        }
+        set
+        {
+            _resolution = value;
+        }
+    }
+
+    public void Throw()
+    {
+        _throwable.Throw(_throwDelay, _throwVelocity, _angularVelocity);
+    }
 
     public OrientedPoint GetOrientedPointAtTime(float time)
     {
-        if (_throwable == null)
-            return default;
+        if(_throwable == null)
+        {
+            return new OrientedPoint()
+            {
+                Position = transform.position,
+                Rotation = transform.rotation
+            };
+        }
 
-        Vector3 initPos = transform.position;
-
-        Vector3 deltaPos = _throwVelocity * time + 0.5f * new Vector2(0, -_throwable.Gravity) * time * time;
-
-        Vector3 newPos = initPos + deltaPos;
-
-        float rotateAngle = time * _angularVelocity;
-
-        Quaternion newRotation = transform.rotation * Quaternion.Euler(0, 0, rotateAngle);
-
-        return new OrientedPoint() { Position = newPos, Rotation = newRotation };
+        return _throwable.GetOrientedPointAtTime(
+            transform.position,
+            transform.rotation,
+            _throwDelay,
+            _throwVelocity,
+            _angularVelocity,
+            _throwable.Gravity,
+            time);
     }
-
-
-
-
-
 }
