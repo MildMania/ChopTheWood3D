@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1179628948789693300
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6098195964226407987}
-  m_Layer: 8
-  m_Name: ModelCarrier
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6098195964226407987
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179628948789693300}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3695408294387101786}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3695408294387101789
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +31,6 @@ Transform:
   m_Children:
   - {fileID: 3695408295264053855}
   - {fileID: 3695408295057529470}
-  - {fileID: 6098195964226407987}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -81,7 +50,7 @@ MonoBehaviour:
     _type: 0
     _edge1: {fileID: 3695408295264053853}
     _edge2: {fileID: 3695408295057529468}
-  _health: 3
+  _pieceLogs: []
 --- !u!65 &3695408294387101787
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -93,8 +62,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.67, y: 2.686712, z: 1}
+  m_Center: {x: 0, y: 0.43643224, z: 0}
 --- !u!1 &3695408295057529409
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +120,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 0.5, z: 1}
+  m_Size: {x: 2.1, y: 0.5, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3695408295264053854
 GameObject:
@@ -179,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3695408295264053854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3695408294387101786}
@@ -209,5 +178,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 0.5, z: 1}
+  m_Size: {x: 2.1, y: 0.5, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

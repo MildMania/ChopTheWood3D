@@ -38,14 +38,11 @@ public class Choppable : MonoBehaviour
 {
     [SerializeField] private int _health;
 
-    private ChoppablePiece[] _pieces;
+    [SerializeField] private ChoppablePiece[] _pieces;
     public ChoppablePiece[] Pieces
     {
         get
         {
-            if (_pieces == null)
-                _pieces = GetComponentsInChildren<ChoppablePiece>();
-
             return _pieces;
         }
     }

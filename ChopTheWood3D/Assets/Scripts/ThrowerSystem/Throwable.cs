@@ -59,9 +59,9 @@ public class Throwable : MonoBehaviour
             transform.position = p.Position;
             transform.rotation = p.Rotation;
 
-            curTime += Time.fixedDeltaTime;
+            curTime += Time.deltaTime;
 
-            yield return Utilities.WaitForFixedUpdate;
+            yield return null;
         }
     }
 
