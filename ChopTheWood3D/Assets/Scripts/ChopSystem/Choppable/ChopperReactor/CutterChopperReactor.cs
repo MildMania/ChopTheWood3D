@@ -2,7 +2,11 @@
 
 public class CutterChopperReactor : ChopperReactorBase<CutterChopController>
 {
-    [SerializeField] private float _cutSpeed;
+    [SerializeField] private float _minExplosionForce;
+    [SerializeField] private float _maxExplosionForce;
+
+    [SerializeField] private float _explosionRadius;
+    [SerializeField] private float _upwardModifier;
 
     public override void ChopFailed(ChopControllerBase chopController)
     {
@@ -14,8 +18,10 @@ public class CutterChopperReactor : ChopperReactorBase<CutterChopController>
         {
             foreach(PieceLog log in piece.PieceLogs)
             {
-                log.Rigidbody.velocity
-                    = _cutSpeed * log.Rigidbody.transform.TransformDirection(log.LocalForward);
+                float targetForce = Utilities.NextFloat(_minExplosionForce, _maxExplosionForce);
+
+                log.Rigidbody.useGravity = true;
+                log.Rigidbody.AddExplosionForce(targetForce, log.ExplosionTransform.position, _explosionRadius, _upwardModifier);
             }
         }
     }
