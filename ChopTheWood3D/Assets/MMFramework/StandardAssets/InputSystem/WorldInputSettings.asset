@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c2b52ea0da8b4f43a2326c626c4cc2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d3ca9ac3c118ca43b5bb859a955e39c, type: 3}
   m_Name: WorldInputSettings
   m_EditorClassIdentifier: 
   MoveFromStartPosInchTreshold: 1
   TapInchTreshold: 0.2
   TapDuration: 0.2
-  InitialDragInchTreshold: 0.1
-  PerFrameDragInchTreshold: 0.001
+  InitialDragInchTreshold: 0
+  PerFrameDragInchTreshold: 0
   SwipeInchTreshold: 0.3
   MoveForSwipeInchTreshold: 0.2
   SwipeHorAngleTrashold: 45
