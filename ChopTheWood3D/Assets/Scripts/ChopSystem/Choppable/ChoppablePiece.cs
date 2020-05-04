@@ -13,12 +13,12 @@ public class PieceLog
         }
     }
 
-    [SerializeField] private Vector3 _localForward;
-    public Vector3 LocalForward
+    [SerializeField] private Transform _explosionTransform;
+    public Transform ExplosionTransform
     {
         get
         {
-            return _localForward;
+            return _explosionTransform;
         }
     }
 }
