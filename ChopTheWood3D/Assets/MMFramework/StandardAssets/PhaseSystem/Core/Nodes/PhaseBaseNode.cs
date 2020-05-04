@@ -19,6 +19,8 @@ public abstract class PhaseBaseNode
 
     public void Traverse()
     {
+        UnityEngine.Debug.Log("Traversing: " + GetType().ToString());
+
         OnTraverseStarted_Static?.Invoke(this);
         OnTraverseStarted?.Invoke(this);
 

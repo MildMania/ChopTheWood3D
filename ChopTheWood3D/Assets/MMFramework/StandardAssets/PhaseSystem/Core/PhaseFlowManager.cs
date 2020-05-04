@@ -2,7 +2,7 @@
 
 public abstract class PhaseFlowManager : MonoBehaviour
 {
-    private void Awake()
+    private void Start()
     {
         PhaseFlowController flowController = CreatePhase();
 
