@@ -7,18 +7,10 @@
 
     protected override void ProcessFlow()
     {
-        //MagnetObjectDropController.OnAllMagnetObjectsDropped += OnAllMagnetObjectsDropped;
     }
 
-    private void OnAllMagnetObjectsDropped()
+    public void CompleteTraverse()
     {
         TraverseCompleted();
-    }
-
-    protected override void TraverseCompletedCustomActions()
-    {
-        //MagnetObjectDropController.OnAllMagnetObjectsDropped -= OnAllMagnetObjectsDropped;
-
-        base.TraverseCompletedCustomActions();
     }
 }

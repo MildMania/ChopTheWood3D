@@ -736,6 +736,51 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5427738896555369381, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: _pieceLogs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5427738896555369381, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[0]._rigidbody
+      value: 
+      objectReference: {fileID: 5727766026522767203}
+    - target: {fileID: 5427738896555369381, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[0]._explosionTransform
+      value: 
+      objectReference: {fileID: 3369464567877609592}
+    - target: {fileID: 5427738896555369381, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[1]._rigidbody
+      value: 
+      objectReference: {fileID: 322623094069101477}
+    - target: {fileID: 5427738896555369381, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[1]._explosionTransform
+      value: 
+      objectReference: {fileID: 628577764296625826}
+    - target: {fileID: 5427738896555369381, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[2]._rigidbody
+      value: 
+      objectReference: {fileID: 5607599570992684717}
+    - target: {fileID: 5427738896555369381, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[2]._explosionTransform
+      value: 
+      objectReference: {fileID: 6012150927758499515}
+    - target: {fileID: 5427738896555369381, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[3]._rigidbody
+      value: 
+      objectReference: {fileID: 3022952352251469568}
+    - target: {fileID: 5427738896555369381, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[3]._explosionTransform
+      value: 
+      objectReference: {fileID: 6917307988138756853}
     - target: {fileID: 9086630761093774635, guid: 3180119a0b0c95b4eafc3e249207d6c4,
         type: 3}
       propertyPath: _renderers.Array.size

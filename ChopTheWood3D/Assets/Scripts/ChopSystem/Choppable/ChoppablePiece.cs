@@ -1,40 +1,9 @@
 ﻿using UnityEngine;
 using System;
 
-[System.Serializable]
-public class PieceLog
-{
-    [SerializeField] private Rigidbody _rigidbody;
-    public Rigidbody Rigidbody
-    {
-        get
-        {
-            return _rigidbody;
-        }
-    }
-
-    [SerializeField] private Transform _explosionTransform;
-    public Transform ExplosionTransform
-    {
-        get
-        {
-            return _explosionTransform;
-        }
-    }
-}
-
 public class ChoppablePiece : MonoBehaviour, IChopperInteractable
 {
     [SerializeField] private ChoppableConnection _connection;
-
-    [SerializeField] private PieceLog[] _pieceLogs;
-    public PieceLog[] PieceLogs
-    {
-        get
-        {
-            return _pieceLogs;
-        }
-    }
 
     public Choppable ParentChoppable { get; private set; }
     public EChopState ChopState { get; private set; }

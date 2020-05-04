@@ -113,8 +113,6 @@ public class ChopBehaviour : MonoBehaviour
 
         if (interactable.ParentChoppable.TryTouchChoppable(interactable, result))
         {
-            Debug.Log("Result: " + result.Result.ToString());
-
             if (interactable.ParentChoppable.ChopState == EChopState.Chopping)
                 _isInsideChoppable = true;
             else

@@ -315,6 +315,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5427738896555369381, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: _pieceLogs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5427738896555369381, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[0]._rigidbody
+      value: 
+      objectReference: {fileID: 3678033948830784721}
+    - target: {fileID: 5427738896555369381, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[0]._explosionTransform
+      value: 
+      objectReference: {fileID: 4230876100702974638}
+    - target: {fileID: 5427738896555369381, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[1]._rigidbody
+      value: 
+      objectReference: {fileID: 5291577283773837823}
+    - target: {fileID: 5427738896555369381, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[1]._explosionTransform
+      value: 
+      objectReference: {fileID: 3003117252988430213}
     - target: {fileID: 9086630761093774635, guid: 3180119a0b0c95b4eafc3e249207d6c4,
         type: 3}
       propertyPath: _renderers.Array.data[0]
