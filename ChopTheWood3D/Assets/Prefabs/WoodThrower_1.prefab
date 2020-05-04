@@ -346,6 +346,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6303240262176106066}
     m_Modifications:
+    - target: {fileID: 3695408294387101784, guid: 0ed944def4f534cfa989517280bde509,
+        type: 3}
+      propertyPath: _pieceLogs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3695408294387101784, guid: 0ed944def4f534cfa989517280bde509,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[0]._rigidbody
+      value: 
+      objectReference: {fileID: 3678033948830784721}
+    - target: {fileID: 3695408294387101784, guid: 0ed944def4f534cfa989517280bde509,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[1]._rigidbody
+      value: 
+      objectReference: {fileID: 5291577283773837823}
+    - target: {fileID: 3695408294387101784, guid: 0ed944def4f534cfa989517280bde509,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[0]._explosionTransform
+      value: 
+      objectReference: {fileID: 4230876100702974638}
+    - target: {fileID: 3695408294387101784, guid: 0ed944def4f534cfa989517280bde509,
+        type: 3}
+      propertyPath: _pieceLogs.Array.data[1]._explosionTransform
+      value: 
+      objectReference: {fileID: 3003117252988430213}
     - target: {fileID: 3695408294387101786, guid: 0ed944def4f534cfa989517280bde509,
         type: 3}
       propertyPath: m_LocalPosition.x
