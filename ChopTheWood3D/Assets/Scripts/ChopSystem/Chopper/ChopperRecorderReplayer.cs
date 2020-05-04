@@ -26,6 +26,8 @@ public class ChopperRecorderReplayer : MonoBehaviour
 
     private IEnumerator ReplayProgress()
     {
+        transform.position = _recorder.Points[0];
+
         OnReplayStarted?.Invoke();
 
         int startPIndex = 0;
