@@ -8,21 +8,16 @@ public class ChopperMovementRecorder : MonoBehaviour
     [SerializeField] private ChopperMovementController _movementController;
 
     [SerializeField] private float _pointDistanceTreshold;
-    [SerializeField] private float _replaySpeed;
 
+    public bool HasRecording { get; private set; }
     public List<Vector3> Points { get; } = new List<Vector3>();
 
     private IEnumerator _recordRoutine;
-    private IEnumerator _replayRoutine;
 
     #region Events
     public Action OnRecordingStarted { get; set; }
     public Action OnRecordingEnded { get; set; }
     public Action<Vector3> OnPointAdded { get; set; }
-
-    public Action OnReplayStarted { get; set; }
-    public Action OnReplayFinished { get; set; }
-    public Action<Vector3> OnReplayUpdated { get; set; }
 
     #endregion
 
@@ -60,6 +55,8 @@ public class ChopperMovementRecorder : MonoBehaviour
 
     private void StartRecordingMovement()
     {
+        HasRecording = false;
+
         _recordRoutine = RecordProgress();
         StartCoroutine(_recordRoutine);
     }
@@ -69,7 +66,7 @@ public class ChopperMovementRecorder : MonoBehaviour
         if (_recordRoutine != null)
             StopCoroutine(_recordRoutine);
 
-        ReplayRecording();
+        HasRecording = true;
     }
 
     private IEnumerator RecordProgress()
@@ -103,47 +100,5 @@ public class ChopperMovementRecorder : MonoBehaviour
         return true;
     }
 
-    private void ReplayRecording()
-    {
-        _replayRoutine = ReplayProgress();
-        StartCoroutine(_replayRoutine);
-    }
-
-    private IEnumerator ReplayProgress()
-    {
-        OnReplayStarted?.Invoke();
-
-        int startPIndex = 0;
-        int endPIndex = 1;
-
-        float extraTime = 0;
-
-        while (endPIndex < Points.Count)
-        {
-            float t = extraTime;
-
-            Vector3 p1 = Points[startPIndex];
-            Vector3 p2 = Points[endPIndex];
-
-            while(t <= 1)
-            {
-                Vector3 newPosition = Vector3.Lerp(p1, p2, t);
-
-                t += Time.deltaTime * _replaySpeed;
-
-                transform.position = newPosition;
-
-                OnReplayUpdated?.Invoke(transform.position);
-
-                yield return null;
-            }
-
-            extraTime = t - 1.0f;
-
-            startPIndex++;
-            endPIndex++;
-        }
-
-        OnReplayFinished?.Invoke();
-    }
+    
 }
