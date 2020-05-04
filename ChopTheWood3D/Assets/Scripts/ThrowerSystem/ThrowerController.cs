@@ -48,12 +48,8 @@ public class ThrowerController : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        ActivateThrowers();
-    }
 
-    private void ActivateThrowers()
+    public void ActivateThrowers()
     {
         foreach (Thrower t in _throwers)
             t.Throw();
