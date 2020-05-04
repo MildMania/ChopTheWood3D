@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UIAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: a7ad42b5ee8a3034f9571bf10444daf0, type: 3}
+    - {fileID: 102900000, guid: 1635325dbdb17e546822e9bea3bfb296, type: 3}
+    - {fileID: 102900000, guid: 2b1bd67a0501e564da35df0662ed81cb, type: 3}
+    - {fileID: 102900000, guid: af6dd99e708796e4c87a6e9fca659077, type: 3}
+    - {fileID: 102900000, guid: 33c6fc449b2312b47a5765e5371811b0, type: 3}
+    - {fileID: 102900000, guid: 1e6b11e1f53a2c44182c8d8cdb0a1c68, type: 3}
+    totalSpriteSurfaceArea: 2745797
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: a4ff9ac0c6f925c4592bf6d466014cf5, type: 3}
+  - {fileID: 21300000, guid: 49da68d0dd59a294294d786dd00b4805, type: 3}
+  - {fileID: 21300000, guid: 86e023e02cfdb8f44afa03a0be48e44f, type: 3}
+  - {fileID: 21300000, guid: 8023f9e0f32d73f4f8b6c73c85604c84, type: 3}
+  - {fileID: 21300000, guid: 70c95ff016d47a84d9eb146de40b4504, type: 3}
+  - {fileID: 21300000, guid: f3506ca116246794e974a9f8d0115361, type: 3}
+  - {fileID: 21300000, guid: bf765613dd164994380908eaa812266e, type: 3}
+  - {fileID: 21300000, guid: 54ae8c53303a84548a66c54ac0b455ce, type: 3}
+  - {fileID: 21300000, guid: 32f3e1d3077376245bf4c2641273a27f, type: 3}
+  - {fileID: 21300000, guid: 94133064e2979fc48a53e64f730ef49d, type: 3}
+  - {fileID: 21300000, guid: 61fbcd355dd641f4a9ba6809eec1815c, type: 3}
+  - {fileID: 21300000, guid: 4acf8985599822b469cda0d84c6c68f0, type: 3}
+  - {fileID: 21300000, guid: 8a7009a51150c164e894f8e37dd47e7f, type: 3}
+  - {fileID: 21300000, guid: cecb1256a6d4b634ba8ab07584cd8abd, type: 3}
+  - {fileID: 21300000, guid: 0e76f368c53e46b44a4163dbdc612794, type: 3}
+  - {fileID: 21300000, guid: 48d93a782e33bae4082d34e6deffce21, type: 3}
+  - {fileID: 21300000, guid: 9de964881c87a0f48ac9496ac63273cf, type: 3}
+  - {fileID: 21300000, guid: ff6b4c799d02df546b5fd93e4fedb6a4, type: 3}
+  - {fileID: 21300000, guid: 492e4c997e48cc549b6c20e617188ec5, type: 3}
+  - {fileID: 21300000, guid: 48e4d6ba6e138a54ca7dc54401bdfc7e, type: 3}
+  - {fileID: 21300000, guid: 5234684da2fbc6841a0f73945a3fb27e, type: 3}
+  - {fileID: 21300000, guid: 47ad8d4df579e854bb02b78891a6290c, type: 3}
+  - {fileID: 21300000, guid: 7b651dad0b188b945b8770bcb3be4504, type: 3}
+  - {fileID: 21300000, guid: 06479cdde6cd92b4f8c836c519cadcd3, type: 3}
+  - {fileID: 21300000, guid: 3a1da12e8755c80458a4162ee309506e, type: 3}
+  - {fileID: 21300000, guid: 4cd9997e2fefa704fb7eb8bb466eac1c, type: 3}
+  - {fileID: 21300000, guid: e53133aebbc9483468bee48df047851e, type: 3}
+  - {fileID: 21300000, guid: b3269cce0c6f2d447bad5f64c5dc5b0b, type: 3}
+  - {fileID: 21300000, guid: 9b2e7efff0f8ba84e990e71fc6adab5c, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - UI_ProcessContainer_Bar
+  - UI_Star2Container_Icon
+  - UI_LevelContainer_Bar
+  - UI_CoinContainer_Icon
+  - UI_BackgroundContainer
+  - UI_StarContainer_Icon
+  - UI_PlayContainer_Button
+  - UI_ProcessContainer_Indicator
+  - UI_ProcessContainer_Indicator
+  - UI_ProcessContainer
+  - UI_BubbleContainer
+  - UI_SettingsContainer_Icon
+  - UI_ProcessContainer_Back
+  - UI_HandContainer_Icon
+  - UI_LevelContainer_Bar
+  - UI_ReplayContainer_Button
+  - UI_CoinContainer_Icon
+  - UI_Star3Container_Icon
+  - UI_LoseContainer_Icon
+  - UI_TitleContainer_Text
+  - UI_StarsContainer_Background
+  - UI_SpeedContainer_Icon
+  - UI_ReplayContainer_Icon
+  - UI_PauseContainer_Icon
+  - UI_ContinueContainer_Button
+  - UI_WinContainer_Icon
+  - UI_LoseContainer_Title
+  - UI_WinContainer_Title
+  - UI_ProcessContainer_White
+  m_Tag: UIAtlas
+  m_IsVariant: 0
