@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 493539541384031686}
   - component: {fileID: 4768542490756015028}
   - component: {fileID: 8603077524638874938}
+  - component: {fileID: 2793953379467540121}
   m_Layer: 0
   m_Name: Wood
   m_TagString: Untagged
@@ -77,6 +78,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cutSpeed: 10
+--- !u!114 &2793953379467540121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493539541384031681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa37f586a519c74408801a1d22afdfb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gravity: 10
 --- !u!54 &7272473115654129161
 Rigidbody:
   m_ObjectHideFlags: 0

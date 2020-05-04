@@ -2,7 +2,13 @@
 
 public class CutterChopController : ChopControllerBase
 {
-    [SerializeField] private ChopperMovementRecorder _recorder;
+    [SerializeField] private ChopperRecorderReplayer _replayer;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            _replayer.TryReplayRecording();
+    }
 
     protected override void AwakeCustomActions()
     {
@@ -20,16 +26,16 @@ public class CutterChopController : ChopControllerBase
 
     private void RegisterToRecorder()
     {
-        _recorder.OnReplayStarted += OnReplayStarted;
-        _recorder.OnReplayFinished += OnReplayFinished;
-        _recorder.OnReplayUpdated += OnReplayUpdated;
+        _replayer.OnReplayStarted += OnReplayStarted;
+        _replayer.OnReplayFinished += OnReplayFinished;
+        _replayer.OnReplayUpdated += OnReplayUpdated;
     }
 
     private void UnregisterFromRecorder()
     {
-        _recorder.OnReplayStarted -= OnReplayStarted;
-        _recorder.OnReplayFinished -= OnReplayFinished;
-        _recorder.OnReplayUpdated -= OnReplayUpdated;
+        _replayer.OnReplayStarted -= OnReplayStarted;
+        _replayer.OnReplayFinished -= OnReplayFinished;
+        _replayer.OnReplayUpdated -= OnReplayUpdated;
     }
 
     private void OnReplayStarted()
