@@ -2,7 +2,9 @@
 
 public class CutterChopperReactor : ChopperReactorBase<CutterChopController>
 {
-    [SerializeField] private float _explosionForce;
+    [SerializeField] private float _minExplosionForce;
+    [SerializeField] private float _maxExplosionForce;
+
     [SerializeField] private float _explosionRadius;
     [SerializeField] private float _upwardModifier;
 
@@ -16,8 +18,10 @@ public class CutterChopperReactor : ChopperReactorBase<CutterChopController>
         {
             foreach(PieceLog log in piece.PieceLogs)
             {
+                float targetForce = Utilities.NextFloat(_minExplosionForce, _maxExplosionForce);
+
                 log.Rigidbody.useGravity = true;
-                log.Rigidbody.AddExplosionForce(_explosionForce, log.ExplosionTransform.position, _explosionRadius, _upwardModifier);
+                log.Rigidbody.AddExplosionForce(targetForce, log.ExplosionTransform.position, _explosionRadius, _upwardModifier);
             }
         }
     }
