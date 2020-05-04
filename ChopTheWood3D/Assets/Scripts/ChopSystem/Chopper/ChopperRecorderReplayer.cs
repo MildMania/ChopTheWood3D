@@ -46,7 +46,7 @@ public class ChopperRecorderReplayer : MonoBehaviour
             {
                 Vector3 newPosition = Vector3.Lerp(p1, p2, t);
 
-                t += Time.deltaTime * _replaySpeed;
+                t += Time.unscaledDeltaTime * _replaySpeed;
 
                 transform.position = newPosition;
 
