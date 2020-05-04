@@ -1,6 +1,6 @@
-﻿public class GhoustCutPhase : PhaseActionNode
+﻿public class GhostCutPhase : PhaseActionNode
 {
-    public GhoustCutPhase(int id)
+    public GhostCutPhase(int id)
         : base(id)
     {
     }
