@@ -14,21 +14,33 @@ public class ChopBehaviour : MonoBehaviour
     public bool _isInsideChoppable;
 
     public Action<Choppable, ChoppablePiece> OnPieceChopped { get; set; }
+    public Action<Choppable, ChoppablePiece> OnExitedPiece { get; set; }
     public Action<Choppable> OnChoppableChopped { get; set; }
     public Action<Choppable> OnChoppableFailed { get; set; }
+    public Action<Choppable, ChoppablePiece> OnChoppableHealthDecreased { get; set; }
+
 
     public void StartChopping(
         ChopControllerBase checkerController,
         Vector3 startPos)
     {
+        Debug.Log("Start chopping: " + checkerController.GetType());
+
         _checkerController = checkerController;
+
+        _checkerController.OnMoved -= OnMoved;
         _checkerController.OnMoved += OnMoved;
 
         _prevPosition = startPos;
     }
 
-    public void StopChopping()
+    public void StopChopping(ChopControllerBase checkerController)
     {
+        if (_checkerController != checkerController)
+            return;
+
+        Debug.Log("Stop chopping: " + checkerController.GetType());
+
         _checkerController.OnMoved -= OnMoved;
         _checkerController = null;
     }
@@ -110,10 +122,14 @@ public class ChopBehaviour : MonoBehaviour
 
             if (result.Result == ETouchResult.ChoppedPiece)
                 OnPieceChopped?.Invoke(result.Choppable, result.ChoppedPiece);
+            else if (result.Result == ETouchResult.ExitingPiece)
+                OnExitedPiece?.Invoke(result.Choppable, result.ChoppedPiece);
             else if (result.Result == ETouchResult.ChoppedAll)
                 OnChoppableChopped?.Invoke(result.Choppable);
             else if (result.Result == ETouchResult.Failed)
                 OnChoppableFailed?.Invoke(result.Choppable);
+            else if (result.Result == ETouchResult.DecreasedHealth)
+                OnChoppableHealthDecreased?.Invoke(result.Choppable, result.ChoppedPiece);
 
             return true;
         }

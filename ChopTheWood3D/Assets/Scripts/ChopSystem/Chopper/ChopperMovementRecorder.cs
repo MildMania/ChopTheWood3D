@@ -20,6 +20,10 @@ public class ChopperMovementRecorder : MonoBehaviour
     public Action OnRecordingEnded { get; set; }
     public Action<Vector3> OnPointAdded { get; set; }
 
+    public Action OnReplayStarted { get; set; }
+    public Action OnReplayFinished { get; set; }
+    public Action<Vector3> OnReplayUpdated { get; set; }
+
     #endregion
 
     private void Awake()
@@ -107,6 +111,8 @@ public class ChopperMovementRecorder : MonoBehaviour
 
     private IEnumerator ReplayProgress()
     {
+        OnReplayStarted?.Invoke();
+
         int startPIndex = 0;
         int endPIndex = 1;
 
@@ -127,6 +133,8 @@ public class ChopperMovementRecorder : MonoBehaviour
 
                 transform.position = newPosition;
 
+                OnReplayUpdated?.Invoke(transform.position);
+
                 yield return null;
             }
 
@@ -135,5 +143,7 @@ public class ChopperMovementRecorder : MonoBehaviour
             startPIndex++;
             endPIndex++;
         }
+
+        OnReplayFinished?.Invoke();
     }
 }

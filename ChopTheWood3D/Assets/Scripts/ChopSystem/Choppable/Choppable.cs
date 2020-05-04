@@ -14,10 +14,11 @@ public enum EChopState
 public enum ETouchResult
 {
     NoTouch, 
-    Entered,
-    Exiting,
+    EnteredPiece,
+    ExitingPiece,
     ChoppedPiece,
     Failed,
+    DecreasedHealth,
     ChoppedAll
 }
 
@@ -35,6 +36,8 @@ public class ChoppableTouchResult
 
 public class Choppable : MonoBehaviour
 {
+    [SerializeField] private int _health;
+
     private ChoppablePiece[] _pieces;
     public ChoppablePiece[] Pieces
     {
@@ -53,7 +56,12 @@ public class Choppable : MonoBehaviour
         get
         {
             if (_reactors == null)
+            {
                 _reactors = GetComponentsInChildren<IChopperReactor>();
+
+                foreach (IChopperReactor r in _reactors)
+                    r.SetParentChoppable(this);
+            }
 
             return _reactors;
         }
@@ -62,13 +70,18 @@ public class Choppable : MonoBehaviour
     public EChopState ChopState { get; private set; }
     public ChoppablePiece CurChopperPiece { get; private set; }
 
+    public int CurHealth { get; private set; }
+
     public bool IsAvailable { get; private set; }
 
     public Action<EChopState> OnStateChanged { get; set; }
+    public Action<int> OnHealthUpdated { get; set; }
     public Action<bool> OnAvailabilityUpdated { get; set; }
 
     private void Awake()
     {
+        CurHealth = _health;
+
         ChopState = EChopState.Idle;
 
         InitPieces();
@@ -139,8 +152,16 @@ public class Choppable : MonoBehaviour
     {
         PieceExiting(p);
 
-        result.Result = ETouchResult.ChoppedPiece;
-        result.ChoppedPiece = p;
+        if (CurHealth == 0)
+        {
+            result.Result = ETouchResult.ChoppedPiece;
+            result.ChoppedPiece = p;
+        }
+        else
+        {
+            result.Result = ETouchResult.ExitingPiece;
+            result.ChoppedPiece = p;
+        }
 
         CheckIfChopped(result);
     }
@@ -158,12 +179,29 @@ public class Choppable : MonoBehaviour
             if (p.ChopState != EChopState.Succeeded)
                 return;
 
-        Debug.Log("Choppable Chopped!");
+        CurHealth--;
 
-        result.Result = ETouchResult.ChoppedAll;
-        result.Choppable = this;
+        OnHealthUpdated?.Invoke(CurHealth);
 
-        SetState(EChopState.Succeeded);
+        if (CurHealth == 0)
+        {
+            result.Result = ETouchResult.ChoppedAll;
+            result.Choppable = this;
+            SetState(EChopState.Succeeded);
+        }
+        else
+        {
+            result.Result = ETouchResult.DecreasedHealth;
+            result.Choppable = this;
+
+            ChopState = EChopState.Idle;
+
+            foreach (ChoppablePiece p in Pieces)
+                p.ResetPiece();
+
+            CurChopperPiece = null;
+        }
+
     }
 
     private void SetState(EChopState state)
@@ -178,6 +216,8 @@ public class Choppable : MonoBehaviour
 
     public void ResetChoppable()
     {
+        CurHealth = _health;
+
         ChopState = EChopState.Idle;
 
         foreach (ChoppablePiece p in Pieces)
@@ -196,6 +236,15 @@ public class Choppable : MonoBehaviour
         OnAvailabilityUpdated?.Invoke(isAvailable);
     }
 
+    public int GetIndexOfPiece(ChoppablePiece piece)
+    {
+        for (int i = 0; i < Pieces.Length; i++)
+            if (Pieces[i] == piece)
+                return i;
+
+        return -1;
+    }
+
     #region Chopper Reactor Methods
     public void ChoppedChoppable(ChopControllerBase chopController)
     {
@@ -211,11 +260,25 @@ public class Choppable : MonoBehaviour
         cr.ChoppedPiece(chopController, piece);
     }
 
+    public void ExitedPiece(ChopControllerBase chopController, ChoppablePiece piece)
+    {
+        IChopperReactor cr = GetReactor(chopController);
+
+        cr.ExitedPiece(chopController, piece);
+    }
+
     public void ChopFailed(ChopControllerBase chopController)
     {
         IChopperReactor cr = GetReactor(chopController);
 
         cr.ChopFailed(chopController);
+    }
+
+    public void DecreasedHealth(ChopControllerBase chopController, ChoppablePiece piece)
+    {
+        IChopperReactor cr = GetReactor(chopController);
+
+        cr.DecreasedHealth(chopController, piece);
     }
 
     private IChopperReactor GetReactor(ChopControllerBase chopController)

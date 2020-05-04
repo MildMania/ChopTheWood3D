@@ -34,12 +34,12 @@ public class GhostChopController : ChopControllerBase
 
     private void OnMovementEnded()
     {
-        _chopBehaviour.StopChopping();
+        StopChopping();
     }
 
     private void OnMovementStarted()
     {
-        _chopBehaviour.StartChopping(this, transform.position);
+        StartChopping();
     }
 
     private void OnChopperMoved(Vector3 newPosition)

@@ -1,22 +1,48 @@
 ﻿using UnityEngine;
 using System;
 
+[System.Serializable]
+public class PieceLog
+{
+    [SerializeField] private Rigidbody _rigidbody;
+    public Rigidbody Rigidbody
+    {
+        get
+        {
+            return _rigidbody;
+        }
+    }
+
+    [SerializeField] private Vector3 _localForward;
+    public Vector3 LocalForward
+    {
+        get
+        {
+            return _localForward;
+        }
+    }
+}
+
 public class ChoppablePiece : MonoBehaviour, IChopperInteractable
 {
     [SerializeField] private ChoppableConnection _connection;
-    [SerializeField] private int _health;
+
+    [SerializeField] private PieceLog[] _pieceLogs;
+    public PieceLog[] PieceLogs
+    {
+        get
+        {
+            return _pieceLogs;
+        }
+    }
 
     public Choppable ParentChoppable { get; private set; }
-    public int CurHealth { get; private set; }
     public EChopState ChopState { get; private set; }
 
     public Action<EChopState> OnStateChanged { get; set; }
-    public Action<int> OnHealthUpdated { get; set; }
 
     public void InitPiece(Choppable choppable)
     {
-        CurHealth = _health;
-
         ParentChoppable = choppable;
 
         SetState(EChopState.Idle);
@@ -51,7 +77,7 @@ public class ChoppablePiece : MonoBehaviour, IChopperInteractable
                 if (other.ChopState == EChopState.Succeeded)
                     CheckPieceChopped(result);
                 else
-                    result.Result = ETouchResult.Entered;
+                    result.Result = ETouchResult.EnteredPiece;
 
                 return true;
             }
@@ -61,7 +87,7 @@ public class ChoppablePiece : MonoBehaviour, IChopperInteractable
                 {
                     edge.Chopped();
                     SetState(EChopState.Chopping);
-                    result.Result = ETouchResult.Entered;
+                    result.Result = ETouchResult.EnteredPiece;
                     ParentChoppable.PieceChopping(this);
 
                     return true;
@@ -97,24 +123,9 @@ public class ChoppablePiece : MonoBehaviour, IChopperInteractable
 
     private void CheckPieceChopped(ChoppableTouchResult result)
     {
-        CurHealth--;
+        SetState(EChopState.Succeeded);
 
-        OnHealthUpdated?.Invoke(CurHealth);
-
-        if (CurHealth == 0)
-        {
-            SetState(EChopState.Succeeded);
-
-            ParentChoppable.PieceChopped(this, result);
-        }
-        else
-        {
-            _connection.ResetConnection();
-
-            result.Result = ETouchResult.Exiting;
-
-            SetState(EChopState.Exiting);
-        }
+        ParentChoppable.PieceChopped(this, result);
     }
 
     private void SetState(EChopState state)
@@ -130,8 +141,6 @@ public class ChoppablePiece : MonoBehaviour, IChopperInteractable
     public void ResetPiece()
     {
         ChopState = EChopState.Idle;
-
-        CurHealth = _health;
 
         _connection.ResetConnection();
     }
