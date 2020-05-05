@@ -13,6 +13,8 @@ public class ChopperRecorderReplayer : MonoBehaviour
     public Action OnReplayStarted { get; set; }
     public Action OnReplayFinished { get; set; }
     public Action<Vector3> OnReplayUpdated { get; set; }
+
+    public Action<RecordingData> OnCurRecordingDataChanged { get; set; }
     #endregion
 
     public void TryReplayRecording()
@@ -26,21 +28,25 @@ public class ChopperRecorderReplayer : MonoBehaviour
 
     private IEnumerator ReplayProgress()
     {
-        transform.position = _recorder.Points[0];
+        RecordingData rd = _recorder.RecordingDataCollection[0];
+
+        transform.position = rd.Point;
 
         OnReplayStarted?.Invoke();
+
+        OnCurRecordingDataChanged?.Invoke(rd);
 
         int startPIndex = 0;
         int endPIndex = 1;
 
         float extraTime = 0;
 
-        while (endPIndex < _recorder.Points.Count)
+        while (endPIndex < _recorder.RecordingDataCollection.Count)
         {
             float t = extraTime;
 
-            Vector3 p1 = _recorder.Points[startPIndex];
-            Vector3 p2 = _recorder.Points[endPIndex];
+            Vector3 p1 = _recorder.RecordingDataCollection[startPIndex].Point;
+            Vector3 p2 = _recorder.RecordingDataCollection[endPIndex].Point;
 
             while (t <= 1)
             {
@@ -54,6 +60,8 @@ public class ChopperRecorderReplayer : MonoBehaviour
 
                 yield return null;
             }
+
+            OnCurRecordingDataChanged?.Invoke(_recorder.RecordingDataCollection[endPIndex]);
 
             extraTime = t - 1.0f;
 

@@ -46,7 +46,7 @@ public class ChopperRecorderVisualizer : MonoBehaviour
         _Recorder.OnRecordingStarted += OnRecordingStarted;
         _Recorder.OnRecordingEnded += OnRecordingEnded;
 
-        _Recorder.OnPointAdded += OnPointAdded;
+        _Recorder.OnRecordingDataAdded += OnPointAdded;
     }
 
     private void UnregisterFromRecorder()
@@ -54,7 +54,7 @@ public class ChopperRecorderVisualizer : MonoBehaviour
         _Recorder.OnRecordingStarted -= OnRecordingStarted;
         _Recorder.OnRecordingEnded -= OnRecordingEnded;
 
-        _Recorder.OnPointAdded -= OnPointAdded;
+        _Recorder.OnRecordingDataAdded -= OnPointAdded;
     }
 
     private void OnRecordingStarted()
@@ -67,12 +67,12 @@ public class ChopperRecorderVisualizer : MonoBehaviour
         StopVisualizing();
     }
 
-    private void OnPointAdded(Vector3 position)
+    private void OnPointAdded(RecordingData rd)
     {
-        _LineRenderer.positionCount = _Recorder.Points.Count;
-        _LineRenderer.SetPosition(_Recorder.Points.Count - 1, position);
+        _LineRenderer.positionCount = _Recorder.RecordingDataCollection.Count;
+        _LineRenderer.SetPosition(_Recorder.RecordingDataCollection.Count - 1, rd.Point);
 
-        if (_Recorder.Points.Count == 2)
+        if (_Recorder.RecordingDataCollection.Count == 2)
             _LineRenderer.enabled = true;
     }
 

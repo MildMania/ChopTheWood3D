@@ -1,8 +1,19 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CutterChopController : ChopControllerBase
 {
     [SerializeField] private ChopperRecorderReplayer _replayer;
+
+    private CutterChopBehaviour _CutterChopBehaviour
+    {
+        get
+        {
+            return (CutterChopBehaviour)_chopBehaviour;
+        }
+    }
+
+    private ChopperCutPhase _chopperCutPhase;
 
     protected override void AwakeCustomActions()
     {
@@ -16,6 +27,8 @@ public class CutterChopController : ChopControllerBase
     {
         if (phase is ChopperCutPhase)
         {
+            _chopperCutPhase = (ChopperCutPhase)phase;
+
             RegisterToRecorder();
 
             _replayer.TryReplayRecording();
@@ -42,14 +55,14 @@ public class CutterChopController : ChopControllerBase
     {
         _replayer.OnReplayStarted += OnReplayStarted;
         _replayer.OnReplayFinished += OnReplayFinished;
-        _replayer.OnReplayUpdated += OnReplayUpdated;
+        _replayer.OnCurRecordingDataChanged += OnCurRecordingDataChanged;
     }
 
     private void UnregisterFromRecorder()
     {
         _replayer.OnReplayStarted -= OnReplayStarted;
         _replayer.OnReplayFinished -= OnReplayFinished;
-        _replayer.OnReplayUpdated -= OnReplayUpdated;
+        _replayer.OnCurRecordingDataChanged -= OnCurRecordingDataChanged;
     }
 
     private void OnReplayStarted()
@@ -60,10 +73,14 @@ public class CutterChopController : ChopControllerBase
     private void OnReplayFinished()
     {
         StopChopping();
+
+        _chopperCutPhase.CompleteTraverse();
     }
 
-    private void OnReplayUpdated(Vector3 newPosition)
+
+    private void OnCurRecordingDataChanged(RecordingData recordingData)
     {
-        OnMoved?.Invoke(newPosition);
+        _CutterChopBehaviour.Move(recordingData);
     }
+
 }

@@ -3,21 +3,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct RecordingData
+{
+    public Vector3 Point { get; set; }
+    public IChopperInteractable InteractedInteractable { get; set; }
+
+    public RecordingData(Vector3 point)
+    {
+        Point = point;
+        InteractedInteractable = null;
+    }
+
+    public RecordingData(
+        Vector3 point,
+        IChopperInteractable interactedInteractable)
+    {
+        Point = point;
+        InteractedInteractable = interactedInteractable;
+    }
+}
+
 public class ChopperMovementRecorder : MonoBehaviour
 {
     [SerializeField] private ChopperMovementController _movementController;
+    [SerializeField] private GhostChopController _ghostChopController;
 
     [SerializeField] private float _pointDistanceTreshold;
 
     public bool HasRecording { get; private set; }
-    public List<Vector3> Points { get; } = new List<Vector3>();
+    public List<RecordingData> RecordingDataCollection { get; } = new List<RecordingData>();
 
     private IEnumerator _recordRoutine;
 
     #region Events
     public Action OnRecordingStarted { get; set; }
     public Action OnRecordingEnded { get; set; }
-    public Action<Vector3> OnPointAdded { get; set; }
+    public Action<RecordingData> OnRecordingDataAdded { get; set; }
 
     #endregion
 
@@ -57,21 +78,33 @@ public class ChopperMovementRecorder : MonoBehaviour
     {
         HasRecording = false;
 
+        _ghostChopController.ChopBehaviour.OnTouchedChoppable += OnTouchedChoppable;
+
         _recordRoutine = RecordProgress();
         StartCoroutine(_recordRoutine);
     }
 
     private void StopRecordingMovement()
     {
+        _ghostChopController.ChopBehaviour.OnTouchedChoppable -= OnTouchedChoppable;
+
         if (_recordRoutine != null)
             StopCoroutine(_recordRoutine);
 
         HasRecording = true;
     }
 
+    private void OnTouchedChoppable(IChopperInteractable interactable)
+    {
+        RecordingData rd = RecordingDataCollection[RecordingDataCollection.Count - 1];
+        rd.InteractedInteractable = interactable;
+
+        RecordingDataCollection[RecordingDataCollection.Count - 1] = rd;
+    }
+
     private IEnumerator RecordProgress()
     {
-        Points.Clear();
+        RecordingDataCollection.Clear();
 
         while (true)
         {
@@ -83,9 +116,9 @@ public class ChopperMovementRecorder : MonoBehaviour
 
     private bool TryRecordPosition()
     {
-        if(Points.Count > 0)
+        if(RecordingDataCollection.Count > 0)
         {
-            Vector3 prevPos = Points[Points.Count - 1];
+            Vector3 prevPos = RecordingDataCollection[RecordingDataCollection.Count - 1].Point;
 
             float distance = Vector3.Distance(transform.position, prevPos);
 
@@ -93,9 +126,11 @@ public class ChopperMovementRecorder : MonoBehaviour
                 return false;
         }
 
-        Points.Add(transform.position);
+        RecordingData rd = new RecordingData(transform.position);
 
-        OnPointAdded?.Invoke(transform.position);
+        RecordingDataCollection.Add(rd);
+
+        OnRecordingDataAdded?.Invoke(rd);
 
         return true;
     }
