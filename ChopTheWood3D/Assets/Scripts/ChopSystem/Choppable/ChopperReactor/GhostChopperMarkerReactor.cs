@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GhostChopperReactor : ChopperReactorBase<GhostChopController>
+public class GhostChopperMarkerReactor : ChopperReactorBase<GhostChopController>
 {
     [SerializeField] private Renderer[] _renderers;
 

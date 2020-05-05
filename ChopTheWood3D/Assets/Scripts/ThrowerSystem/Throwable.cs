@@ -41,6 +41,12 @@ public class Throwable : MonoBehaviour
         StartCoroutine(_throwRoutine);
     }
 
+    public void StopThrow()
+    {
+        if (_throwRoutine != null)
+            StopCoroutine(_throwRoutine);
+    }
+
     private IEnumerator ThrowProgress()
     {
         float curTime = 0;

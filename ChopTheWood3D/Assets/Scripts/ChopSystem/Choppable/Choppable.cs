@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 public enum EChopState
 {
@@ -290,42 +291,48 @@ public class Choppable : MonoBehaviour
     #region Chopper Reactor Methods
     public void ChoppedChoppable(ChopControllerBase chopController)
     {
-        IChopperReactor cr = GetReactor(chopController);
+        List<IChopperReactor> crList = GetReactors(chopController);
 
-        cr.ChoppedChoppable(chopController);
+        crList.ForEach(val => val.ChoppedChoppable(chopController));
     }
 
     public void ChoppedPiece(ChopControllerBase chopController, ChoppablePiece piece)
     {
-        IChopperReactor cr = GetReactor(chopController);
+        List<IChopperReactor> crList = GetReactors(chopController);
 
-        cr.ChoppedPiece(chopController, piece);
+        crList.ForEach(val => val.ChoppedPiece(chopController, piece));
     }
 
     public void ExitedPiece(ChopControllerBase chopController, ChoppablePiece piece)
     {
-        IChopperReactor cr = GetReactor(chopController);
+        List<IChopperReactor> crList = GetReactors(chopController);
 
-        cr.ExitedPiece(chopController, piece);
+        crList.ForEach(val => val.ExitedPiece(chopController, piece));
     }
 
     public void ChopFailed(ChopControllerBase chopController)
     {
-        IChopperReactor cr = GetReactor(chopController);
+        List<IChopperReactor> crList = GetReactors(chopController);
 
-        cr.ChopFailed(chopController);
+        crList.ForEach(val => val.ChopFailed(chopController));
     }
 
     public void DecreasedHealth(ChopControllerBase chopController, ChoppablePiece piece)
     {
-        IChopperReactor cr = GetReactor(chopController);
+        List<IChopperReactor> crList = GetReactors(chopController);
 
-        cr.DecreasedHealth(chopController, piece);
+        crList.ForEach(val => val.DecreasedHealth(chopController, piece));
     }
 
-    private IChopperReactor GetReactor(ChopControllerBase chopController)
+    private List<IChopperReactor> GetReactors(ChopControllerBase chopController)
     {
-        return _Reactors.FirstOrDefault(val => val.GetChopControllerType() == chopController.GetType());
+        List<IChopperReactor> reactors = new List<IChopperReactor>();
+
+        foreach (IChopperReactor r in _Reactors)
+            if (r.GetChopControllerType() == chopController.GetType())
+                reactors.Add(r);
+
+        return reactors;
     }
     #endregion
 }
