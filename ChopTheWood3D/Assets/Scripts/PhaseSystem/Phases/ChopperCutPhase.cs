@@ -9,6 +9,17 @@ public class ChopperCutPhase : PhaseActionNode
 
     protected override void ProcessFlow()
     {
+        ChoppableController.Instance.OnNoVisibleChoppableLeft += OnNoVisibleChoppableLeft;
+    }
+
+    private void OnNoVisibleChoppableLeft()
+    {
+        TraverseCompleted();
+    }
+
+    protected override void TraverseCompletedCustomActions()
+    {
+        ChoppableController.Instance.OnNoVisibleChoppableLeft -= OnNoVisibleChoppableLeft;
     }
 
     public void CompleteTraverse()

@@ -4,8 +4,6 @@ public class CutterChopController : ChopControllerBase
 {
     [SerializeField] private ChopperRecorderReplayer _replayer;
 
-    private ChopperCutPhase _chopperCutPhase;
-
     protected override void AwakeCustomActions()
     {
         PhaseBaseNode.OnTraverseStarted_Static += OnPhaseTraverStarted;
@@ -18,8 +16,6 @@ public class CutterChopController : ChopControllerBase
     {
         if (phase is ChopperCutPhase)
         {
-            _chopperCutPhase = (ChopperCutPhase)phase;
-
             RegisterToRecorder();
 
             _replayer.TryReplayRecording();
@@ -64,8 +60,6 @@ public class CutterChopController : ChopControllerBase
     private void OnReplayFinished()
     {
         StopChopping();
-
-        _chopperCutPhase.CompleteTraverse();
     }
 
     private void OnReplayUpdated(Vector3 newPosition)
