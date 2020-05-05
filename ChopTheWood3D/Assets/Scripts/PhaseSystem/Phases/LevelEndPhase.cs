@@ -9,10 +9,10 @@ public class LevelEndPhase : PhaseConditionalNode
 
     protected override void CheckConditions(Action<int> callback)
     {
-        int callbackNodeID = 5;
+        int callbackNodeID = 6;
 
-        //if (LevelEndController.Instance.DidSucceed)
-        //    callbackNodeID = 4;
+        if (ThrowerControllerManager.Instance.AnyThrowPhaseLeft)
+            callbackNodeID = 5;
 
         callback?.Invoke(callbackNodeID);
     }
