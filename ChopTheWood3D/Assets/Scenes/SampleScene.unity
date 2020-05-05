@@ -781,6 +781,7 @@ GameObject:
   - component: {fileID: 837428342}
   - component: {fileID: 837428344}
   - component: {fileID: 837428343}
+  - component: {fileID: 837428346}
   - component: {fileID: 837428340}
   m_Layer: 0
   m_Name: Chopper
@@ -876,6 +877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementController: {fileID: 837428336}
+  _ghostChopController: {fileID: 837428342}
   _pointDistanceTreshold: 0.2
 --- !u!114 &837428336
 MonoBehaviour:
@@ -1090,7 +1092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536a4e1dbc3924c88969245dd0c98505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chopBehaviour: {fileID: 837428343}
+  _chopBehaviour: {fileID: 837428346}
   _replayer: {fileID: 837428345}
 --- !u!114 &837428345
 MonoBehaviour:
@@ -1106,6 +1108,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recorder: {fileID: 837428335}
   _replaySpeed: 50
+--- !u!114 &837428346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837428330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ee77ff3df244b48b2020f692245495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &925153488
 PrefabInstance:
   m_ObjectHideFlags: 0
