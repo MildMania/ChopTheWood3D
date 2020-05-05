@@ -121,7 +121,7 @@ public class Choppable : MonoBehaviour
     {
         bool isVisible = Utilities.IsTargetVisible(_Camera, transform.position);
 
-        if (isVisible && !IsAvailable)
+        if (isVisible && !IsVisible)
         {
             OnBecameVisible?.Invoke(true);
             OnBecameVisible_Static?.Invoke(this, true);

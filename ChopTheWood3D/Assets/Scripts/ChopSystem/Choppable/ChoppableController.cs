@@ -87,6 +87,7 @@ public class ChoppableController : MonoBehaviour
 
     private void OnGhostCutPhaseEnded()
     {
+        _visibleChoppables.Clear();
     }
 
     private void OnChoppableSetAvailable(Choppable choppable, bool isAvailable)
