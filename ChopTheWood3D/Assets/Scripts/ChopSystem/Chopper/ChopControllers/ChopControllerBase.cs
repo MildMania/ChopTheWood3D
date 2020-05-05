@@ -3,9 +3,14 @@ using UnityEngine;
 
 public class ChopControllerBase : MonoBehaviour
 {
-    [SerializeField] private ChopBehaviour _chopBehaviour;
-
-    public Action<Vector3> OnMoved { get; set; }
+    [SerializeField] protected ChopBehaviourBase _chopBehaviour;
+    public ChopBehaviourBase ChopBehaviour
+    {
+        get
+        {
+            return _chopBehaviour;
+        }
+    }
 
     #region Events
 
@@ -37,15 +42,14 @@ public class ChopControllerBase : MonoBehaviour
     protected void StartChopping()
     {
         RegisterToChopBehaviour();
-        _chopBehaviour.StartChopping(this, transform.position);
+        _chopBehaviour.StartChopping(transform.position);
 
         OnStartedChopping?.Invoke();
-
     }
 
     protected void StopChopping()
     {
-        _chopBehaviour.StopChopping(this);
+        _chopBehaviour.StopChopping();
         UnregisterFromChopBehaviour();
 
         OnStoppedChopping?.Invoke();

@@ -6,6 +6,14 @@ public class GhostChopController : ChopControllerBase
 
     private GhostCutPhase _ghostCutPhase;
 
+    private GhostChopBehaviour _GhostChopBehaviour
+    {
+        get
+        {
+            return (GhostChopBehaviour)_chopBehaviour;
+        }
+    }
+
     protected override void AwakeCustomActions()
     {
         PhaseBaseNode.OnTraverseStarted_Static += OnPhaseTraverStarted;
@@ -67,6 +75,6 @@ public class GhostChopController : ChopControllerBase
 
     private void OnChopperMoved(Vector3 newPosition)
     {
-        OnMoved?.Invoke(newPosition);
+        _GhostChopBehaviour.Move(newPosition);
     }
 }
