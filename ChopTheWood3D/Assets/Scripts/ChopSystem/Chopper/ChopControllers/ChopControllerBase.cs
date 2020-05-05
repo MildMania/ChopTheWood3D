@@ -7,6 +7,13 @@ public class ChopControllerBase : MonoBehaviour
 
     public Action<Vector3> OnMoved { get; set; }
 
+    #region Events
+
+    public Action OnStartedChopping { get; set; }
+    public Action OnStoppedChopping { get; set; }
+
+    #endregion
+
     private void Awake()
     {
         AwakeCustomActions();
@@ -32,12 +39,16 @@ public class ChopControllerBase : MonoBehaviour
         RegisterToChopBehaviour();
         _chopBehaviour.StartChopping(this, transform.position);
 
+        OnStartedChopping?.Invoke();
+
     }
 
     protected void StopChopping()
     {
         _chopBehaviour.StopChopping(this);
         UnregisterFromChopBehaviour();
+
+        OnStoppedChopping?.Invoke();
     }
 
     private void RegisterToChopBehaviour()
