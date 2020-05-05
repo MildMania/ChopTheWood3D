@@ -12,7 +12,6 @@
     {
         return new LevelPhase(0,
             new MainMenuPhase(1),
-            new LogThrowPhase(11),
             new GhostCutPhase(10),
             new ChopperCutPhase(2),
             new LevelEndPhase(3,

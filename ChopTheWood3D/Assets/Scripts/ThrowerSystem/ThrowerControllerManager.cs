@@ -72,7 +72,7 @@ public class ThrowerControllerManager : MonoBehaviour
 
     private void OnPhaseNodeTraverStarted(PhaseBaseNode phaseNode)
     {
-        if (!(phaseNode is LogThrowPhase))
+        if (!(phaseNode is GhostCutPhase))
             return;
 
         ActivateThrowerController();
@@ -80,7 +80,7 @@ public class ThrowerControllerManager : MonoBehaviour
 
     private void OnPhaseNodeTraverFinished(PhaseBaseNode phaseNode)
     {
-        if (!(phaseNode is LogThrowPhase))
+        if (!(phaseNode is GhostCutPhase))
             return;
 
         _throwPhaseIndex++;
