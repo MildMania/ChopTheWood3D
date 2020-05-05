@@ -27,11 +27,14 @@ public class CutterChopController : ChopControllerBase
     {
         if (phase is ChopperCutPhase)
         {
+            Debug.Log("Chopped Cut Phase Started");
+
             _chopperCutPhase = (ChopperCutPhase)phase;
 
             RegisterToRecorder();
 
-            _replayer.TryReplayRecording();
+            if(!_replayer.TryReplayRecording())
+                _chopperCutPhase.CompleteTraverse();
         }
     }
 

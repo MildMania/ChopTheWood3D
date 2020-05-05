@@ -17,13 +17,15 @@ public class ChopperRecorderReplayer : MonoBehaviour
     public Action<RecordingData> OnCurRecordingDataChanged { get; set; }
     #endregion
 
-    public void TryReplayRecording()
+    public bool TryReplayRecording()
     {
         if (!_recorder.HasRecording)
-            return;
+            return false;
 
         _replayRoutine = ReplayProgress();
         StartCoroutine(_replayRoutine);
+
+        return true;
     }
 
     private IEnumerator ReplayProgress()

@@ -42,6 +42,8 @@ public class ChopperInputController : MonoBehaviour, IInputReceiver
             return;
 
         ChoppableController.Instance.OnFirstChoppableBecameVisible += OnFirstChoppableBecameVisible;
+        ChoppableController.Instance.OnNoVisibleChoppableLeft += OnNoVisibleChoppableLeft;
+
     }
 
     private void OnPhaseNodeTraverseFinished(PhaseBaseNode phaseNode)
@@ -49,8 +51,7 @@ public class ChopperInputController : MonoBehaviour, IInputReceiver
         if (!(phaseNode is GhostCutPhase))
             return;
 
-        ChoppableController.Instance.OnFirstChoppableBecameVisible -= OnFirstChoppableBecameVisible;
-        UnregisterFromInputTransmitter();
+        StopInput();
     }
 
     private void OnFirstChoppableBecameVisible()
@@ -58,6 +59,19 @@ public class ChopperInputController : MonoBehaviour, IInputReceiver
         ChoppableController.Instance.OnFirstChoppableBecameVisible -= OnFirstChoppableBecameVisible;
 
         RegisterToInputTransmitter();
+    }
+
+
+    private void OnNoVisibleChoppableLeft()
+    {
+        StopInput();
+    }
+
+    private void StopInput()
+    {
+        ChoppableController.Instance.OnFirstChoppableBecameVisible -= OnFirstChoppableBecameVisible;
+        ChoppableController.Instance.OnNoVisibleChoppableLeft -= OnNoVisibleChoppableLeft;
+        UnregisterFromInputTransmitter();
     }
 
     private void RegisterToInputTransmitter()
