@@ -4,15 +4,35 @@ public class GhostChopController : ChopControllerBase
 {
     [SerializeField] private ChopperMovementController _movementController;
 
+    private GhostCutPhase _ghostCutPhase;
+
     protected override void AwakeCustomActions()
     {
-        RegisterToMovementController();
+        PhaseBaseNode.OnTraverseStarted_Static += OnPhaseTraverStarted;
+        PhaseBaseNode.OnTraverseFinished_Static += OnPhaseTraverFinished;
 
         base.AwakeCustomActions();
     }
 
+    private void OnPhaseTraverStarted(PhaseBaseNode phase)
+    {
+        if (phase is LogThrowPhase)
+            RegisterToMovementController();
+        else if (phase is GhostCutPhase)
+            _ghostCutPhase = (GhostCutPhase)phase;
+    }
+
+    private void OnPhaseTraverFinished(PhaseBaseNode phase)
+    {
+        if (phase is GhostCutPhase)
+            UnregisterFromMovementController();
+    }
+
     protected override void OnDestroyCustomActions()
     {
+        PhaseBaseNode.OnTraverseStarted_Static -= OnPhaseTraverStarted;
+        PhaseBaseNode.OnTraverseFinished_Static -= OnPhaseTraverFinished;
+
         UnregisterFromMovementController();
 
         base.OnDestroyCustomActions();
@@ -35,6 +55,8 @@ public class GhostChopController : ChopControllerBase
     private void OnMovementEnded()
     {
         StopChopping();
+
+        _ghostCutPhase.CompleteTraverse();
     }
 
     private void OnMovementStarted()

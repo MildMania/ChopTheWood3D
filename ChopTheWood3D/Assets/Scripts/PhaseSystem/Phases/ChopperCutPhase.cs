@@ -9,18 +9,10 @@ public class ChopperCutPhase : PhaseActionNode
 
     protected override void ProcessFlow()
     {
-        //LevelEndController.Instance.OnLevelEnded += OnLevelEnded;
     }
 
-    private void OnLevelEnded(bool didSucceed)
+    public void CompleteTraverse()
     {
         TraverseCompleted();
-    }
-
-    protected override void TraverseCompletedCustomActions()
-    {
-        //LevelEndController.Instance.OnLevelEnded -= OnLevelEnded;
-
-        base.TraverseCompletedCustomActions();
     }
 }

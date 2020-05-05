@@ -4,21 +4,39 @@ public class CutterChopController : ChopControllerBase
 {
     [SerializeField] private ChopperRecorderReplayer _replayer;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            _replayer.TryReplayRecording();
-    }
+    private ChopperCutPhase _chopperCutPhase;
 
     protected override void AwakeCustomActions()
     {
-        RegisterToRecorder();
+        PhaseBaseNode.OnTraverseStarted_Static += OnPhaseTraverStarted;
+        PhaseBaseNode.OnTraverseFinished_Static += OnPhaseTraverFinished;
 
         base.AwakeCustomActions();
     }
 
+    private void OnPhaseTraverStarted(PhaseBaseNode phase)
+    {
+        if (phase is ChopperCutPhase)
+        {
+            _chopperCutPhase = (ChopperCutPhase)phase;
+
+            RegisterToRecorder();
+
+            _replayer.TryReplayRecording();
+        }
+    }
+
+    private void OnPhaseTraverFinished(PhaseBaseNode phase)
+    {
+        if (phase is ChopperCutPhase)
+            UnregisterFromRecorder();
+    }
+
     protected override void OnDestroyCustomActions()
     {
+        PhaseBaseNode.OnTraverseStarted_Static -= OnPhaseTraverStarted;
+        PhaseBaseNode.OnTraverseFinished_Static -= OnPhaseTraverFinished;
+
         UnregisterFromRecorder();
 
         base.OnDestroyCustomActions();
@@ -46,6 +64,8 @@ public class CutterChopController : ChopControllerBase
     private void OnReplayFinished()
     {
         StopChopping();
+
+        _chopperCutPhase.CompleteTraverse();
     }
 
     private void OnReplayUpdated(Vector3 newPosition)

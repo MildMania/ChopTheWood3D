@@ -36,7 +36,7 @@ public abstract class PhaseBaseNode
 
     protected abstract void TraverseNode();
 
-    public void TraverseCompleted()
+    protected void TraverseCompleted()
     {
         IsTraversed = true;
 
