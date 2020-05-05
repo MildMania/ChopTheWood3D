@@ -670,12 +670,12 @@ PrefabInstance:
         type: 3}
       propertyPath: _pieces.Array.data[0]
       value: 
-      objectReference: {fileID: 2810025597589906160}
+      objectReference: {fileID: 6988345521988072068}
     - target: {fileID: 4246350399720797017, guid: 3180119a0b0c95b4eafc3e249207d6c4,
         type: 3}
       propertyPath: _pieces.Array.data[1]
       value: 
-      objectReference: {fileID: 6988345521988072068}
+      objectReference: {fileID: 2810025597589906160}
     - target: {fileID: 4246350400109077880, guid: 3180119a0b0c95b4eafc3e249207d6c4,
         type: 3}
       propertyPath: m_Name

@@ -29,8 +29,6 @@ public class ChoppableEdge : MonoBehaviour, IChopperInteractable
         ChopState = EChopState.Succeeded;
 
         _collider.enabled = false;
-
-        Debug.Log("Edge Chopped: " + gameObject.name);
     }
 
     public void ResetEdge()

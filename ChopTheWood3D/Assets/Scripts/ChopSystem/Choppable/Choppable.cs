@@ -123,11 +123,15 @@ public class Choppable : MonoBehaviour
 
         if (isVisible && !IsVisible)
         {
+            //Debug.Log("Became visible");
+
             OnBecameVisible?.Invoke(true);
             OnBecameVisible_Static?.Invoke(this, true);
         }
         else if(!isVisible && IsVisible)
         {
+            //Debug.Log("Became invisible");
+
             OnBecameVisible?.Invoke(false);
             OnBecameVisible_Static?.Invoke(this, false);
         }
