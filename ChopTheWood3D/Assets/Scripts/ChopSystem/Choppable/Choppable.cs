@@ -71,9 +71,30 @@ public class Choppable : MonoBehaviour
 
     public bool IsAvailable { get; private set; }
 
+    public bool IsVisible { get; private set; }
+
+    private Camera _camera;
+    private Camera _Camera
+    {
+        get
+        {
+            if (_camera == null)
+                _camera = Camera.main;
+
+            return _camera;
+        }
+    }
+
+    #region Events
     public Action<EChopState> OnStateChanged { get; set; }
     public Action<int> OnHealthUpdated { get; set; }
-    public Action<bool> OnAvailabilityUpdated { get; set; }
+    public Action<Choppable, bool> OnSetAvailable { get; set; }
+    public static Action<Choppable, bool> OnSetAvailable_Static { get; set; }
+
+    public Action<bool> OnBecameVisible { get; set; }
+    public static Action<Choppable, bool> OnBecameVisible_Static { get; set; }
+
+    #endregion
 
     private void Awake()
     {
@@ -88,6 +109,40 @@ public class Choppable : MonoBehaviour
     {
         foreach (ChoppablePiece p in Pieces)
             p.InitPiece(this);
+    }
+
+    private void Update()
+    {
+        CheckBecomeVisible();
+    }
+
+    private void CheckBecomeVisible()
+    {
+        bool isVisible = Utilities.IsTargetVisible(_Camera, transform.position);
+
+        if (isVisible && !IsAvailable)
+        {
+            OnBecameVisible?.Invoke(true);
+            OnBecameVisible_Static?.Invoke(this, true);
+        }
+        else if(!isVisible && IsVisible)
+        {
+            OnBecameVisible?.Invoke(false);
+            OnBecameVisible_Static?.Invoke(this, false);
+        }
+
+        IsVisible = isVisible;
+    }
+
+    public void SetChoppableAvailable(bool isAvailable)
+    {
+        if (IsAvailable == isAvailable)
+            return;
+
+        IsAvailable = isAvailable;
+
+        OnSetAvailable?.Invoke(this, isAvailable);
+        OnSetAvailable_Static?.Invoke(this, isAvailable);
     }
 
     public bool TryTouchChoppable(IChopperInteractable interactable, ChoppableTouchResult result)
@@ -221,16 +276,6 @@ public class Choppable : MonoBehaviour
             p.ResetPiece();
 
         CurChopperPiece = null;
-    }
-
-    public void SetChoppableActive(bool isAvailable)
-    {
-        if (IsAvailable == isAvailable)
-            return;
-
-        IsAvailable = isAvailable;
-
-        OnAvailabilityUpdated?.Invoke(isAvailable);
     }
 
     public int GetIndexOfPiece(ChoppablePiece piece)

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,12 +16,48 @@ public class ChopperInputController : MonoBehaviour, IInputReceiver
 
     private void Awake()
     {
-        RegisterToInputTransmitter();
+        RegisterToPhaseBaseNode();
     }
 
     private void OnDestroy()
     {
+        UnregisterFromPhaseBaseNode();
+    }
+
+    private void RegisterToPhaseBaseNode()
+    {
+        PhaseBaseNode.OnTraverseStarted_Static += OnPhaseNodeTraverseStarted;
+        PhaseBaseNode.OnTraverseFinished_Static += OnPhaseNodeTraverseFinished;
+    }
+
+    private void UnregisterFromPhaseBaseNode()
+    {
+        PhaseBaseNode.OnTraverseStarted_Static -= OnPhaseNodeTraverseStarted;
+        PhaseBaseNode.OnTraverseFinished_Static -= OnPhaseNodeTraverseFinished;
+    }
+
+    private void OnPhaseNodeTraverseStarted(PhaseBaseNode phaseNode)
+    {
+        if (!(phaseNode is GhostCutPhase))
+            return;
+
+        ChoppableController.Instance.OnFirstChoppableBecameVisible += OnFirstChoppableBecameVisible;
+    }
+
+    private void OnPhaseNodeTraverseFinished(PhaseBaseNode phaseNode)
+    {
+        if (!(phaseNode is GhostCutPhase))
+            return;
+
+        ChoppableController.Instance.OnFirstChoppableBecameVisible -= OnFirstChoppableBecameVisible;
         UnregisterFromInputTransmitter();
+    }
+
+    private void OnFirstChoppableBecameVisible()
+    {
+        ChoppableController.Instance.OnFirstChoppableBecameVisible -= OnFirstChoppableBecameVisible;
+
+        RegisterToInputTransmitter();
     }
 
     private void RegisterToInputTransmitter()

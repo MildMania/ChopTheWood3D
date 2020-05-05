@@ -16,10 +16,11 @@ public class GhostChopController : ChopControllerBase
 
     private void OnPhaseTraverStarted(PhaseBaseNode phase)
     {
-        if (phase is LogThrowPhase)
-            RegisterToMovementController();
-        else if (phase is GhostCutPhase)
+        if (phase is GhostCutPhase)
+        {
             _ghostCutPhase = (GhostCutPhase)phase;
+            RegisterToMovementController();
+        }
     }
 
     private void OnPhaseTraverFinished(PhaseBaseNode phase)
