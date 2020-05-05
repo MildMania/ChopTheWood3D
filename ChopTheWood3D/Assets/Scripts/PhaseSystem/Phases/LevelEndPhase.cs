@@ -42,10 +42,10 @@ public class LevelEndPhase : PhaseConditionalNode
 
     private void CheckCondition()
     {
-        int callbackNodeID = 6;
+        int callbackNodeID = 7;
 
         if (ThrowerControllerManager.Instance.AnyThrowPhaseLeft)
-            callbackNodeID = 5;
+            callbackNodeID = 6;
 
         _callback?.Invoke(callbackNodeID);
     }

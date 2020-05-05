@@ -771,6 +771,7 @@ GameObject:
   - component: {fileID: 837428333}
   - component: {fileID: 837428332}
   - component: {fileID: 837428331}
+  - component: {fileID: 837428340}
   - component: {fileID: 837428338}
   - component: {fileID: 837428337}
   - component: {fileID: 837428339}
@@ -782,7 +783,6 @@ GameObject:
   - component: {fileID: 837428344}
   - component: {fileID: 837428343}
   - component: {fileID: 837428346}
-  - component: {fileID: 837428340}
   m_Layer: 0
   m_Name: Chopper
   m_TagString: Untagged
