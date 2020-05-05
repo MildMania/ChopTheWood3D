@@ -28,7 +28,6 @@ public class ChoppableController : MonoBehaviour
         }
     }
 
-    private List<Choppable> _availableChoppables = new List<Choppable>();
     private List<Choppable> _visibleChoppables = new List<Choppable>();
 
     #region Events
@@ -49,6 +48,7 @@ public class ChoppableController : MonoBehaviour
     private void RegisterToPhaseBaseNode()
     {
         PhaseBaseNode.OnTraverseStarted_Static += OnTraverseStarted;
+        PhaseBaseNode.OnTraverseFinished_Static += OnTraverseFinished;
     }
 
     private void UnregisterFromPhaseBaseNode()
@@ -61,21 +61,10 @@ public class ChoppableController : MonoBehaviour
     {
         if (phaseNode is GhostCutPhase)
             OnGhostCutPhaseStarted();
-
     }
 
     private void OnGhostCutPhaseStarted()
     {
-        foreach (Choppable c in AllChoppables)
-        {
-            if (c.IsAvailable)
-                _availableChoppables.Add(c);
-
-            if (c.IsVisible)
-                _visibleChoppables.Add(c);
-        }
-
-        Choppable.OnSetAvailable_Static += OnChoppableSetAvailable;
         Choppable.OnBecameVisible_Static += OnChoppableBecameVisible;
     }
 
@@ -87,15 +76,9 @@ public class ChoppableController : MonoBehaviour
 
     private void OnGhostCutPhaseEnded()
     {
-    }
+        _visibleChoppables.Clear();
 
-    private void OnChoppableSetAvailable(Choppable choppable, bool isAvailable)
-    {
-        if (isAvailable
-            && !_availableChoppables.Contains(choppable))
-            _availableChoppables.Add(choppable);
-        else if (!isAvailable)
-            _availableChoppables.Remove(choppable);
+        Choppable.OnBecameVisible_Static -= OnChoppableBecameVisible;
     }
 
     private void OnChoppableBecameVisible(Choppable choppable, bool isVisible)

@@ -55,8 +55,6 @@ public class ChopperInputController : MonoBehaviour, IInputReceiver
 
     private void OnFirstChoppableBecameVisible()
     {
-        Debug.Log("OnFirstChoppableBecameVisible");
-
         ChoppableController.Instance.OnFirstChoppableBecameVisible -= OnFirstChoppableBecameVisible;
 
         RegisterToInputTransmitter();

@@ -44,6 +44,8 @@ public class ThrowerControllerManager : MonoBehaviour
 
     private int _throwPhaseIndex;
 
+    private ThrowerController _curThrowerController;
+
     public bool AnyThrowPhaseLeft { get; private set; }
 
     private void Awake()
@@ -80,17 +82,21 @@ public class ThrowerControllerManager : MonoBehaviour
 
     private void OnPhaseNodeTraverFinished(PhaseBaseNode phaseNode)
     {
-        if (!(phaseNode is GhostCutPhase))
-            return;
+        if (phaseNode is GhostCutPhase)
+        {
+            _throwPhaseIndex++;
 
-        _throwPhaseIndex++;
-
-        CheckAnyThrowPhaseLeft();
+            CheckAnyThrowPhaseLeft();
+        }
+        else if(phaseNode is ChopperCutPhase)
+            _curThrowerController.DeactivateThrowers();
     }
 
     private void ActivateThrowerController()
     {
-        _throwPhaseInfoArr[_throwPhaseIndex].ThrowerController.ActivateThrowers();
+        _curThrowerController = _throwPhaseInfoArr[_throwPhaseIndex].ThrowerController;
+
+        _curThrowerController.ActivateThrowers();
     }
 
     private void CheckAnyThrowPhaseLeft()

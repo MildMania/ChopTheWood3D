@@ -48,10 +48,23 @@ public class ThrowerController : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        DeactivateThrowers();
+    }
 
     public void ActivateThrowers()
     {
         foreach (Thrower t in _throwers)
+        {
+            t.gameObject.SetActive(true);
             t.Throw();
+        }
+    }
+
+    public void DeactivateThrowers()
+    {
+        foreach (Thrower t in _throwers)
+            t.gameObject.SetActive(false);
     }
 }

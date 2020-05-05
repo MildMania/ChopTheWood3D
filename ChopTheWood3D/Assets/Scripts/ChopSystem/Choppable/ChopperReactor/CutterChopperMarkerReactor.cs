@@ -40,7 +40,6 @@ public class CutterChopperMarkerReactor : ChopperReactorBase<CutterChopControlle
         for (int i = 0; i < _renderers.Length; i++)
         {
             _renderers[i].GetPropertyBlock(_mpbArr[i]);
-
             //for (int pIndex = 0; pIndex < Parent.Pieces.Length; pIndex++)
             //    _mpbArr[i].SetFloat(_piecePropertyArr[pIndex], 1);
 

@@ -19,7 +19,7 @@ public abstract class PhaseBaseNode
 
     public void Traverse()
     {
-        UnityEngine.Debug.Log("Traversing: " + GetType().ToString());
+        //UnityEngine.Debug.Log("Traversing: " + GetType().ToString());
 
         OnTraverseStarted_Static?.Invoke(this);
         OnTraverseStarted?.Invoke(this);
@@ -50,11 +50,14 @@ public abstract class PhaseBaseNode
     {
     }
 
-    public virtual void ResetNode()
+    public void ResetNode()
     {
+        IsTraversed = false;
+
+        ResetNodeCustomActions();
     }
 
-    public virtual void ResetNodeCustomActions()
+    protected virtual void ResetNodeCustomActions()
     {
     }
 }

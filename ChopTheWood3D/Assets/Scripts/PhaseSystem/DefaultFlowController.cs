@@ -12,13 +12,12 @@
     {
         PhaseSerialComposition cutSerialPhase = new PhaseSerialComposition(2,
             new GhostCutPhase(4),
-            new ChopperCutPhase(5));
+            new ChopperCutPhase(5, 2.0f));
 
         return new LevelPhase(0,
             new MainMenuPhase(1),
             cutSerialPhase,
             new LevelEndPhase(3,
-                2.0f,
                 new PhaseGotoNode(6, cutSerialPhase),
                 new LevelPostEndPhase(7,
                     new PhaseSerialComposition(8,

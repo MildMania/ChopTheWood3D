@@ -41,8 +41,17 @@ public abstract class PhaseComposition : PhaseBaseNode
         return ChildPhaseNodes.Any(val => !val.IsTraversed);
     }
 
-    public override void ResetNode()
+    protected sealed override void ResetNodeCustomActions()
     {
         ChildPhaseNodes.ForEach(p => p.ResetNode());
+
+        ResetCompositionNodeCustomActions();
+
+        base.ResetNodeCustomActions();
+    }
+
+    protected virtual void ResetCompositionNodeCustomActions()
+    {
+
     }
 }

@@ -26,6 +26,5 @@ public class GhostChopperMovementReactor : ChopperReactorBase<GhostChopControlle
 
     public override void ExitedPiece(ChopControllerBase chopController, ChoppablePiece piece)
     {
-        _throwable.StopThrow();
     }
 }
