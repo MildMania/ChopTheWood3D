@@ -10,6 +10,20 @@ public abstract class PhaseComposition : PhaseBaseNode
         : base(id)
     {
         ChildPhaseNodes = childPhaseNodes.ToList();
+
+        ChildPhaseNodes.ForEach(n => n.OnNodeReset += OnChildNodeReset);
+    }
+
+    private void OnChildNodeReset(PhaseBaseNode resetedNode)
+    {
+        int startIndex = ChildPhaseNodes.IndexOf(resetedNode);
+        int nextIndex = startIndex + 1;
+
+        if (nextIndex == ChildPhaseNodes.Count)
+            return;
+
+        if (ChildPhaseNodes[nextIndex].IsTraversed)
+            ChildPhaseNodes[nextIndex].ResetNode();
     }
 
     public T GetPhaseByType<T>() where T : PhaseBaseNode

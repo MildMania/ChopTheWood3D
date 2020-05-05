@@ -10,15 +10,14 @@
 
     protected override PhaseBaseNode CreateRootNode()
     {
-        PhaseSerialComposition cutSerialPhase = new PhaseSerialComposition(2,
-            new GhostCutPhase(4),
-            new ChopperCutPhase(5, 2.0f));
+        GhostCutPhase ghostCutPhase = new GhostCutPhase(4);
 
         return new LevelPhase(0,
             new MainMenuPhase(1),
-            cutSerialPhase,
+            ghostCutPhase,
+            new ChopperCutPhase(5, 1.5f),
             new LevelEndPhase(3,
-                new PhaseGotoNode(6, cutSerialPhase),
+                new PhaseGotoNode(6, ghostCutPhase),
                 new LevelPostEndPhase(7,
                     new PhaseSerialComposition(8,
                         new LevelWinPhase(10, 1),

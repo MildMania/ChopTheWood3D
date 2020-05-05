@@ -3,6 +3,7 @@
     public PhaseParallelComposition(int id, params PhaseBaseNode[] childNodeArr)
     : base(id, childNodeArr)
     {
+        ChildPhaseNodes.ForEach(n => n.OnTraverseFinished += OnChildNodeTraverseFinished);
     }
 
     protected override void TraverseComposition()
@@ -15,8 +16,6 @@
 
     void TraverseChildNode(PhaseBaseNode node)
     {
-        node.OnTraverseFinished += OnChildNodeTraverseFinished;
-
         node.Traverse();
     }
 

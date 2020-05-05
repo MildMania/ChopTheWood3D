@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
-public class CutterChopperMarkerReactor : ChopperReactorBase<CutterChopController>
+public class CutterChopperVisualReactor : ChopperReactorBase<CutterChopController>
 {
     [SerializeField] private Renderer[] _renderers;
-    [SerializeField] [Range(0.0f, 1.0f)] private int _targetAlpha;
-    [SerializeField] private int _duration;
+    [SerializeField] private float _delay;
+    [SerializeField] private float _duration;
 
     private MaterialPropertyBlock[] _mpbArr;
-
     private const string TINT_COLOR_PROPERTY = "_TintColor";
+    private IEnumerator _fadeoutRoutine;
 
     private void Awake()
     {
@@ -37,16 +35,49 @@ public class CutterChopperMarkerReactor : ChopperReactorBase<CutterChopControlle
 
     private void FadeOutPieces()
     {
+        if (_fadeoutRoutine != null)
+            StopCoroutine(_fadeoutRoutine);
+
+        _fadeoutRoutine = FadeoutRoutine();
+        StartCoroutine(_fadeoutRoutine);
+    }
+
+    private IEnumerator FadeoutRoutine()
+    {
+        yield return new WaitForSecondsRealtime(_delay);
+
+        Color targetColor = Color.white;
+
+        float remDur = _duration;
+
+        while (remDur >= 0.0f)
+        {
+            targetColor.a = remDur / _duration;
+
+            remDur -= Time.unscaledDeltaTime;
+
+            for (int i = 0; i < _renderers.Length; i++)
+            {
+                _renderers[i].GetPropertyBlock(_mpbArr[i]);
+
+                _mpbArr[i].SetColor(TINT_COLOR_PROPERTY, targetColor);
+                
+                _renderers[i].SetPropertyBlock(_mpbArr[i]);
+            }
+
+            yield return null;
+        }
+
         for (int i = 0; i < _renderers.Length; i++)
         {
             _renderers[i].GetPropertyBlock(_mpbArr[i]);
-            //for (int pIndex = 0; pIndex < Parent.Pieces.Length; pIndex++)
-            //    _mpbArr[i].SetFloat(_piecePropertyArr[pIndex], 1);
 
-            //_mpbArr[i].SetColor(MASK_COLOR_PROPERTY, _choppableChopColor);
+            _mpbArr[i].SetColor(TINT_COLOR_PROPERTY, new Color(1, 1, 1, 0));
 
             _renderers[i].SetPropertyBlock(_mpbArr[i]);
         }
+
+        _fadeoutRoutine = null;
     }
 
     public override void ChoppedPiece(ChopControllerBase chopController, ChoppablePiece piece)

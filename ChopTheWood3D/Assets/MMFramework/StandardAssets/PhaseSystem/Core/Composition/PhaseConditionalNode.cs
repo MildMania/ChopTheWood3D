@@ -5,6 +5,7 @@ public abstract class PhaseConditionalNode : PhaseComposition
     public PhaseConditionalNode(int id, params PhaseBaseNode[] childNodeArr)
         : base(id, childNodeArr)
     {
+        ChildPhaseNodes.ForEach(n => n.OnTraverseFinished += OnChildNodeTraverseFinished);
     }
 
     protected sealed override void TraverseComposition()
@@ -16,15 +17,11 @@ public abstract class PhaseConditionalNode : PhaseComposition
     {
         PhaseBaseNode resultNode = GetPhaseByID(nextPhaseID);
 
-        resultNode.OnTraverseFinished += OnChildNodeTraverseFinished;
-
         resultNode.Traverse();
     }
 
     private void OnChildNodeTraverseFinished(PhaseBaseNode n)
     {
-        n.OnTraverseFinished -= OnChildNodeTraverseFinished;
-
         TraverseCompleted();
     }
 

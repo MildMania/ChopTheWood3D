@@ -3,6 +3,7 @@
     public PhaseSerialComposition(int id, params PhaseBaseNode[] childNodeArr)
         : base(id, childNodeArr)
     {
+        ChildPhaseNodes.ForEach(n => n.OnTraverseFinished += OnChildNodeTraverseFinished);
     }
 
     protected override void TraverseComposition()
@@ -12,15 +13,11 @@
 
     void TraverseChildNode(PhaseBaseNode node)
     {
-        node.OnTraverseFinished += OnChildNodeTraverseFinished;
-
         node.Traverse();
     }
 
     void OnChildNodeTraverseFinished(PhaseBaseNode n)
     {
-        n.OnTraverseFinished -= OnChildNodeTraverseFinished;
-
         if (HasAnyNotTraversedNodes())
         {
             int traversedNodeIndex = ChildPhaseNodes.IndexOf(n);
