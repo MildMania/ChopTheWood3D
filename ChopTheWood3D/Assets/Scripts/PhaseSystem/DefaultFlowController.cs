@@ -10,16 +10,20 @@
 
     protected override PhaseBaseNode CreateRootNode()
     {
+        GhostCutPhase ghostCutPhase = new GhostCutPhase(2);
+
         return new LevelPhase(0,
             new MainMenuPhase(1),
-            new GhostCutPhase(10),
-            new ChopperCutPhase(2),
-            new LevelEndPhase(3,
-                new PhaseSerialComposition(4,
-                    new LevelWinPhase(6, 1),
-                    new LevelWinPostPhase(7)),
-                new PhaseSerialComposition(5,
-                    new LevelLosePhase(8, 1.5f),
-                    new LevelLosePostPhase(9))));
+            ghostCutPhase,
+            new ChopperCutPhase(3),
+            new LevelEndPhase(4,
+                new PhaseGotoNode(5, ghostCutPhase),
+                new LevelPostEndPhase(6,
+                    new PhaseSerialComposition(7,
+                        new LevelWinPhase(9, 1),
+                        new LevelWinPostPhase(10)),
+                    new PhaseSerialComposition(8,
+                        new LevelLosePhase(11, 1.5f),
+                        new LevelLosePostPhase(12)))));
     }
 }
