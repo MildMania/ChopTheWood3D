@@ -110,7 +110,6 @@ public class ChoppableController : MonoBehaviour
         }
         else if (!isVisible)
         {
-
             _visibleChoppables.Remove(choppable);
 
             if (_visibleChoppables.Count == 0)
