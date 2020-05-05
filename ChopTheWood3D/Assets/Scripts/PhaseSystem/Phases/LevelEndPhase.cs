@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using UnityEngine;
 
 public class LevelEndPhase : PhaseConditionalNode
 {
@@ -11,10 +9,10 @@ public class LevelEndPhase : PhaseConditionalNode
 
     protected override void CheckConditions(Action<int> callback)
     {
-        int callbackNodeID = 6;
+        int callbackNodeID = 7;
 
         if (ThrowerControllerManager.Instance.AnyThrowPhaseLeft)
-            callbackNodeID = 5;
+            callbackNodeID = 6;
 
         callback?.Invoke(callbackNodeID);
     }
