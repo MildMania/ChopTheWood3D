@@ -1,6 +1,4 @@
-﻿using System;
-
-public class ChopperCutPhase : PhaseActionNode
+﻿public class ChopperCutPhase : PhaseActionNode
 {
     public ChopperCutPhase(int id) 
         : base(id)
@@ -8,6 +6,10 @@ public class ChopperCutPhase : PhaseActionNode
     }
 
     protected override void ProcessFlow()
+    {
+    }
+
+    protected override void TraverseCompletedCustomActions()
     {
     }
 

@@ -17,6 +17,7 @@
             ghostCutPhase,
             new ChopperCutPhase(3),
             new LevelEndPhase(4,
+                2.0f,
                 new PhaseGotoNode(5, ghostCutPhase),
                 new LevelPostEndPhase(6,
                     new PhaseSerialComposition(7,
