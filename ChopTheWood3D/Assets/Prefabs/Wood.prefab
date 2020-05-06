@@ -68,6 +68,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _failEffect: {fileID: 19800000, guid: 54de83b2f6344584c9349a044aa598fa, type: 3}
+  _zOffset: -1
   _pieceChopColor: {r: 0.894, g: 0.87997645, b: 0.34357646, a: 0}
   _choppableChopColor: {r: 0.5316013, g: 0.8490566, b: 0.33241364, a: 1}
 --- !u!114 &4501607325398685365
@@ -86,6 +87,7 @@ MonoBehaviour:
   _cartoonCutEffect: {fileID: 19800004, guid: 9524c66db7b74ca40b32d25d031a4263, type: 3}
   _cutDebrisEffect: {fileID: 198873518947433100, guid: c4283401a5094a74094432f3f12bda58,
     type: 3}
+  _zOffset: -1
   _delay: 1.5
   _duration: 2
 --- !u!114 &8010440279357086972

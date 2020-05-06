@@ -819,7 +819,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.41346136, g: 0.19215688, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 1, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1423,6 +1423,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088753184637600725, guid: 885d32a62bdf192409867e2ff8cabd18,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088753184637600725, guid: 885d32a62bdf192409867e2ff8cabd18,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088753184637600725, guid: 885d32a62bdf192409867e2ff8cabd18,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088753184637600725, guid: 885d32a62bdf192409867e2ff8cabd18,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088753184637600725, guid: 885d32a62bdf192409867e2ff8cabd18,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088753184637600725, guid: 885d32a62bdf192409867e2ff8cabd18,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088753184637600725, guid: 885d32a62bdf192409867e2ff8cabd18,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.a
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088753184637600725, guid: 885d32a62bdf192409867e2ff8cabd18,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.a
+      value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 9155916836856871103, guid: 885d32a62bdf192409867e2ff8cabd18,
         type: 3}

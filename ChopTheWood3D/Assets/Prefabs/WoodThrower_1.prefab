@@ -260,6 +260,21 @@ PrefabInstance:
       propertyPath: _renderers.Array.data[1]
       value: 
       objectReference: {fileID: 6604740710560541330}
+    - target: {fileID: 4246350399720797016, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4246350399720797016, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4246350399720797016, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4246350399720797017, guid: 3180119a0b0c95b4eafc3e249207d6c4,
         type: 3}
       propertyPath: _pieces.Array.size

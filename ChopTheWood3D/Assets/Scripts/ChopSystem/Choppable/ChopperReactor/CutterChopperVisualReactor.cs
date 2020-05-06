@@ -6,6 +6,7 @@ public class CutterChopperVisualReactor : ChopperReactorBase<CutterChopControlle
     [SerializeField] private Renderer[] _renderers;
     [SerializeField] private ParticleSystem _cartoonCutEffect;
     [SerializeField] private ParticleSystem _cutDebrisEffect;
+    [SerializeField] private float _zOffset;
     [SerializeField] private float _delay;
     [SerializeField] private float _duration;
 
@@ -41,7 +42,10 @@ public class CutterChopperVisualReactor : ChopperReactorBase<CutterChopControlle
     private void InstantiateAndPlayParticle(ParticleSystem particle)
     {
         ParticleSystem effectInstance = Instantiate(particle);
-        effectInstance.transform.position = transform.position;
+        Vector3 pos = transform.position;
+        pos.z += _zOffset;
+        effectInstance.transform.position = pos;
+
         effectInstance.Play();
     }
 

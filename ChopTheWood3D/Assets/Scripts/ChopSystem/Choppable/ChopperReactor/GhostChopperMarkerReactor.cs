@@ -4,6 +4,7 @@ public class GhostChopperMarkerReactor : ChopperReactorBase<GhostChopController>
 {
     [SerializeField] private Renderer[] _renderers;
     [SerializeField] private ParticleSystem _failEffect;
+    [SerializeField] private float _zOffset;
 
     [SerializeField] private Color _pieceChopColor;
     [SerializeField] private Color _choppableChopColor;
@@ -64,7 +65,10 @@ public class GhostChopperMarkerReactor : ChopperReactorBase<GhostChopController>
     private void InstantiateAndPlayParticle(ParticleSystem particle)
     {
         ParticleSystem effectInstance = Instantiate(particle);
-        effectInstance.transform.position = transform.position;
+        Vector3 pos = transform.position;
+        pos.z += _zOffset;
+        effectInstance.transform.position = pos;
+        
         effectInstance.Play();
     }
 

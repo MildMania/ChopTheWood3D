@@ -94,7 +94,7 @@ public class ChopperVisualizer : MonoBehaviour
         _Replayer.OnReplayStarted += OnReplayStarted;
         _Replayer.OnReplayFinished += OnReplayFinished;
 
-        _Replayer.OnReplayUpdated += OnReplayUpdated;
+        //_Replayer.OnReplayUpdated += OnReplayUpdated;
     }
 
     private void UnregisterFromReplayer()
@@ -102,7 +102,7 @@ public class ChopperVisualizer : MonoBehaviour
         _Replayer.OnReplayStarted -= OnReplayStarted;
         _Replayer.OnReplayFinished -= OnReplayFinished;
 
-        _Replayer.OnReplayUpdated -= OnReplayUpdated;
+        //_Replayer.OnReplayUpdated -= OnReplayUpdated;
     }
 
     private void OnReplayStarted()
@@ -113,6 +113,9 @@ public class ChopperVisualizer : MonoBehaviour
     private void OnReplayFinished()
     {
         StopVisualizing();
+
+        _LineRenderer.positionCount = 0;
+        _LineRenderer.enabled = false;
     }
 
     private void OnReplayUpdated(Vector3 point)
@@ -126,6 +129,9 @@ public class ChopperVisualizer : MonoBehaviour
         _LineRenderer.positionCount++;
         _LineRenderer.SetPosition(_LineRenderer.positionCount - 1, point);
 
+        //if (_LineRenderer.positionCount % 5 == 0)
+        //    _LineRenderer.Simplify(0.2f);
+
         if (_LineRenderer.positionCount == 2)
             _LineRenderer.enabled = true;
     }
@@ -137,8 +143,8 @@ public class ChopperVisualizer : MonoBehaviour
 
     private void StopVisualizing()
     {
-        _LineRenderer.positionCount = 0;
-        _LineRenderer.enabled = false;
+        //_LineRenderer.positionCount = 0;
+        //_LineRenderer.enabled = false;
 
         _cutPointRenderer.enabled = false;
     }
