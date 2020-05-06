@@ -40,8 +40,6 @@ public class GhostChopperMarkerReactor : ChopperReactorBase<GhostChopController>
     public override void ChoppedChoppable(ChopControllerBase chopController)
     {
         MarkChoppable();
-
-        Parent.ResetChoppable();
     }
 
     public override void ChoppedPiece(

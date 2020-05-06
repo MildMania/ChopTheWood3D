@@ -76,6 +76,9 @@ public class ChoppableController : MonoBehaviour
 
     private void OnGhostCutPhaseEnded()
     {
+        foreach (Choppable c in _visibleChoppables)
+            c.ResetChoppable();
+
         _visibleChoppables.Clear();
 
         Choppable.OnBecameVisible_Static -= OnChoppableBecameVisible;

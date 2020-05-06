@@ -68,8 +68,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _failEffect: {fileID: 19800000, guid: 54de83b2f6344584c9349a044aa598fa, type: 3}
-  _pieceChopColor: {r: 1, g: 0.97164285, b: 0, a: 0}
-  _choppableChopColor: {r: 0.24372888, g: 1, b: 0, a: 0}
+  _pieceChopColor: {r: 0.894, g: 0.87997645, b: 0.34357646, a: 0}
+  _choppableChopColor: {r: 0.5316013, g: 0.8490566, b: 0.33241364, a: 1}
 --- !u!114 &4501607325398685365
 MonoBehaviour:
   m_ObjectHideFlags: 0

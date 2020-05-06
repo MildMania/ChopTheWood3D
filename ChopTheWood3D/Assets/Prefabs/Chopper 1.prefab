@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _recorder: {fileID: 6021016780007528508}
-  _replaySpeed: 50
+  _replaySpeed: 150
 --- !u!114 &6021016780007528486
 MonoBehaviour:
   m_ObjectHideFlags: 0

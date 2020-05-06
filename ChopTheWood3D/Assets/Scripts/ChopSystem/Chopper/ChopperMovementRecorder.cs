@@ -44,12 +44,30 @@ public class ChopperMovementRecorder : MonoBehaviour
 
     private void Awake()
     {
+        RegisterToPhaseBaseNode();
         RegisterToMovementController();
     }
 
     private void OnDestroy()
     {
+        UnregisterFromPhaseNode();
         UnregisterFromMovementController();
+    }
+
+    private void RegisterToPhaseBaseNode()
+    {
+        PhaseBaseNode.OnTraverseStarted_Static += OnPhaseTraverseStarted;
+    }
+
+    private void UnregisterFromPhaseNode()
+    {
+        PhaseBaseNode.OnTraverseStarted_Static -= OnPhaseTraverseStarted;
+    }
+
+    private void OnPhaseTraverseStarted(PhaseBaseNode phaseNode)
+    {
+        if (phaseNode is GhostCutPhase)
+            ResetRecording();
     }
 
     private void RegisterToMovementController()
@@ -80,7 +98,7 @@ public class ChopperMovementRecorder : MonoBehaviour
 
     private void StartRecordingMovement()
     {
-        HasRecording = false;
+        ResetRecording();
 
         _ghostChopController.ChopBehaviour.OnTouchedChoppable += OnTouchedChoppable;
 
@@ -105,6 +123,7 @@ public class ChopperMovementRecorder : MonoBehaviour
 
         RecordingDataCollection[RecordingDataCollection.Count - 1] = rd;
     }
+
 
     private IEnumerator RecordProgress()
     {
@@ -139,5 +158,11 @@ public class ChopperMovementRecorder : MonoBehaviour
         return true;
     }
 
-    
+
+    private void ResetRecording()
+    {
+        HasRecording = false;
+
+        RecordingDataCollection.Clear();
+    }
 }

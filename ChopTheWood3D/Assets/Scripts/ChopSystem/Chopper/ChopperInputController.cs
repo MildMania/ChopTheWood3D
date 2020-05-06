@@ -72,6 +72,8 @@ public class ChopperInputController : MonoBehaviour, IInputReceiver
         ChoppableController.Instance.OnFirstChoppableBecameVisible -= OnFirstChoppableBecameVisible;
         ChoppableController.Instance.OnNoVisibleChoppableLeft -= OnNoVisibleChoppableLeft;
         UnregisterFromInputTransmitter();
+
+        OnMoveEndInput?.Invoke(new Input_WI_OnFingerUp(0, Vector2.zero));
     }
 
     private void RegisterToInputTransmitter()
