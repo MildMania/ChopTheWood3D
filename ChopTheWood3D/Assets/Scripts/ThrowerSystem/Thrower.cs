@@ -26,11 +26,6 @@ public class Thrower : MonoBehaviour
 
     [SerializeField] private float _throwDelay;
 
-    [SerializeField] [Range(0, 30)] private float _maxRandomZRot;
-
-    private float _randomInitZRot;
-
-
     [SerializeField] private Color _handleColor = Color.red;
     public Color HandleColor
     {
@@ -94,15 +89,9 @@ public class Thrower : MonoBehaviour
         }
     }
 
-    private Quaternion _initRot;
-
     public void Throw()
     {
-        float initXRot = Utilities.NextFloat(-_maxRandomZRot, _maxRandomZRot);
-
-        _initRot = transform.rotation * Quaternion.Euler(initXRot, 0, 0);
-
-        _throwable.Throw(_throwDelay, _throwVelocity, _angularVelocity, _initRot);
+        _throwable.Throw(_throwDelay, _throwVelocity, _angularVelocity, transform.rotation);
     }
 
     public OrientedPoint GetOrientedPointAtTime(float time)
@@ -118,7 +107,7 @@ public class Thrower : MonoBehaviour
 
         return _throwable.GetOrientedPointAtTime(
             transform.position,
-            _initRot,
+            transform.rotation,
             _throwDelay,
             _throwVelocity,
             _angularVelocity,

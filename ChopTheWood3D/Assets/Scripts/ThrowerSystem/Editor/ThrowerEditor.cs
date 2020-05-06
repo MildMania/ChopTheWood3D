@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+[CanEditMultipleObjects]
 [CustomEditor(typeof(Thrower))]
 public class ThrowerEditor : Editor
 {

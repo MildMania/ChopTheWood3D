@@ -32,7 +32,6 @@ public class Throwable : MonoBehaviour
         _throwVelocity = velocity;
         _angularVelocity = angularVelocity;
 
-        transform.localPosition = Vector3.zero;
         transform.rotation = initRot;
 
         _initPos = transform.position;
