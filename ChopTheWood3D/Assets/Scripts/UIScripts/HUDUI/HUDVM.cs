@@ -10,19 +10,29 @@ public class HUDVM : VMBase
     public HUDVM()
     {
         PhaseBaseNode.OnTraverseStarted_Static += OnPhaseTraverseStarted;
+        PhaseBaseNode.OnTraverseFinished_Static += OnPhaseTraverseFinished;
     }
 
     protected override void DisposeCustomActions()
     {
         PhaseBaseNode.OnTraverseStarted_Static -= OnPhaseTraverseStarted;
+        PhaseBaseNode.OnTraverseFinished_Static -= OnPhaseTraverseFinished;
     }
 
-    private void OnPhaseTraverseStarted(PhaseBaseNode phaseBaseNode)
+    private void OnPhaseTraverseStarted(PhaseBaseNode phase)
     {
-        //if (phaseBaseNode is GamePhase)
-        //    ActivateUI();
-        //else
-        //    DeactivateUI();
+        if (!(phase is GhostCutPhase))
+            return;
+
+        ActivateUI();
+    }
+
+    private void OnPhaseTraverseFinished(PhaseBaseNode phase)
+    {
+        if (!(phase is GhostCutPhase))
+            return;
+
+        DeactivateUI();
     }
 
     private void ActivateUI()

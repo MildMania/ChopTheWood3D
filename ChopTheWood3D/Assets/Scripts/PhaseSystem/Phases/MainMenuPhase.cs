@@ -7,7 +7,6 @@
 
     protected override void ProcessFlow()
     {
-        TraverseCompleted();
     }
 
     public void CompleteTraverse()
