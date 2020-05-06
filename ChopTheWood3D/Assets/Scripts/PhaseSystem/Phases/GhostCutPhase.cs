@@ -11,6 +11,8 @@
 
     public void CompleteTraverse()
     {
+        UnityEngine.Debug.Log("Complete ghost cut phase");
+
         TraverseCompleted();
     }
 }

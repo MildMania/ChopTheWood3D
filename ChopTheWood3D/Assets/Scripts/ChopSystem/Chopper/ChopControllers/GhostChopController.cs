@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GhostChopController : ChopControllerBase
 {
@@ -27,6 +28,9 @@ public class GhostChopController : ChopControllerBase
         if (phase is GhostCutPhase)
         {
             _ghostCutPhase = (GhostCutPhase)phase;
+
+            ChoppableController.Instance.OnNoVisibleChoppableLeft += OnNoVisibleChoppableLeft;
+
             RegisterToMovementController();
         }
     }
@@ -34,11 +38,17 @@ public class GhostChopController : ChopControllerBase
     private void OnPhaseTraverFinished(PhaseBaseNode phase)
     {
         if (phase is GhostCutPhase)
+        {
+            ChoppableController.Instance.OnNoVisibleChoppableLeft -= OnNoVisibleChoppableLeft;
+
             UnregisterFromMovementController();
+        }
     }
 
     protected override void OnDestroyCustomActions()
     {
+        ChoppableController.Instance.OnNoVisibleChoppableLeft -= OnNoVisibleChoppableLeft;
+
         PhaseBaseNode.OnTraverseStarted_Static -= OnPhaseTraverStarted;
         PhaseBaseNode.OnTraverseFinished_Static -= OnPhaseTraverFinished;
 
@@ -59,6 +69,11 @@ public class GhostChopController : ChopControllerBase
         _movementController.OnMovementStarted -= OnMovementStarted;
         _movementController.OnMovementEnded -= OnMovementEnded;
         _movementController.OnMoved -= OnChopperMoved;
+    }
+
+    private void OnNoVisibleChoppableLeft()
+    {
+        _ghostCutPhase.CompleteTraverse();
     }
 
     private void OnMovementEnded()

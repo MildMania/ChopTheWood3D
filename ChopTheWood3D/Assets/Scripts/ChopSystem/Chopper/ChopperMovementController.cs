@@ -68,9 +68,7 @@ public class ChopperMovementController : MonoBehaviour
 
     private void SetPosition(Vector2 screenPos)
     {
-        Vector3 newPosition = _Camera.ScreenToWorldPoint(screenPos);
-
-        newPosition.z = transform.position.z;
+        Vector3 newPosition = _Camera.GetWorldPositionOnPlane(screenPos, transform.position.z);
 
         transform.position = newPosition;
     }
