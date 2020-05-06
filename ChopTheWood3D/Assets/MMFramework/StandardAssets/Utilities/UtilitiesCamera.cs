@@ -53,4 +53,13 @@ static partial class Utilities
 
         return angle;
     }
+
+    public static Vector3 GetWorldPositionOnPlane(this Camera cam, Vector3 screenPosition, float z)
+    {
+        Ray ray = cam.ScreenPointToRay(screenPosition);
+        Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, z));
+        float distance;
+        xy.Raycast(ray, out distance);
+        return ray.GetPoint(distance);
+    }
 }

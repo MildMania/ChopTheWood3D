@@ -25,14 +25,15 @@ public class Throwable : MonoBehaviour
     public void Throw(
         float delay,
         Vector2 velocity,
-        float angularVelocity)
+        float angularVelocity,
+        Quaternion initRot)
     {
         _throwDelay = delay;
         _throwVelocity = velocity;
         _angularVelocity = angularVelocity;
 
         transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
+        transform.rotation = initRot;
 
         _initPos = transform.position;
         _initRotation = transform.rotation;
