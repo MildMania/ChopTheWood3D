@@ -2,27 +2,37 @@
 
 public class LoseVM : VMBase
 {
-    private int _playerMoneyAtStart;
+    private int _playerMoneyAtStart = 0;
 
     public LoseVM()
     {
         PhaseBaseNode.OnTraverseStarted_Static += OnPhaseTraverseStarted;
+        PhaseBaseNode.OnTraverseFinished_Static += OnPhaseTraverseFinished;
     }
 
     protected override void DisposeCustomActions()
     {
         PhaseBaseNode.OnTraverseStarted_Static -= OnPhaseTraverseStarted;
+        PhaseBaseNode.OnTraverseFinished_Static -= OnPhaseTraverseFinished;
     }
 
-    private void OnPhaseTraverseStarted(PhaseBaseNode phaseBaseNode)
+    private void OnPhaseTraverseStarted(PhaseBaseNode phase)
     {
-        //if (phaseBaseNode is LevelLosePostPhase)
-        //    ActivateUI();
-        //else
-        //    DeactivateUI();
+        if (!(phase is LevelLosePostPhase))
+            return;
 
-        //if (phaseBaseNode is GamePhase)
+        ActivateUI();
+
+        //if (phase is GhostCutPhase)
         //    _playerMoneyAtStart = UserMoneyManager.Instance.UserMoneyAmount;
+    }
+
+    private void OnPhaseTraverseFinished(PhaseBaseNode phase)
+    {
+        if (!(phase is LevelLosePostPhase))
+            return;
+
+        DeactivateUI();
     }
 
     private void ActivateUI()

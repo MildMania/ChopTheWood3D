@@ -20,10 +20,10 @@
                 new PhaseGotoNode(6, ghostCutPhase),
                 new LevelPostEndPhase(7,
                     new PhaseSerialComposition(8,
-                        new LevelWinPhase(10, 1),
+                        new LevelWinPhase(10, 0.5f),
                         new LevelWinPostPhase(11)),
                     new PhaseSerialComposition(9,
-                        new LevelLosePhase(12, 1.5f),
+                        new LevelLosePhase(12, 0.5f),
                         new LevelLosePostPhase(13)))));
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class LoseUI : UIMenu<LoseUI>
 {
-    [SerializeField] private NextUnlockDrawerController _nextUnlockDrawerController;
+    //[SerializeField] private NextUnlockDrawerController _nextUnlockDrawerController;
     [SerializeField] private SessionCoinDrawerController _sessionCoinDrawerController;
     [SerializeField] private UnityUIButton _retryButton;
 
@@ -38,7 +38,7 @@ public class LoseUI : UIMenu<LoseUI>
     {
         _viewModel.FinishListeningEvents();
 
-        _nextUnlockDrawerController.DeactivateListeners();
+        //_nextUnlockDrawerController.DeactivateListeners();
         _sessionCoinDrawerController.DeactivateListeners();
 
         UIButtons.ForEach(b => b.StopListening());
@@ -51,7 +51,7 @@ public class LoseUI : UIMenu<LoseUI>
     {
         _viewModel.StartListeningEvents();
 
-        _nextUnlockDrawerController.ActivateListeners();
+        //_nextUnlockDrawerController.ActivateListeners();
         _sessionCoinDrawerController.ActivateListeners();
 
         UIButtons.ForEach(b => b.StartListening());
@@ -62,7 +62,7 @@ public class LoseUI : UIMenu<LoseUI>
 
     protected override IEnumerator PreActivateAdditional()
     {
-        _nextUnlockDrawerController.DistributeData(new List<IPLDBase>() { _viewModel.GetPrevNextUnlockPLD() });
+        //_nextUnlockDrawerController.DistributeData(new List<IPLDBase>() { _viewModel.GetPrevNextUnlockPLD() });
 
         return base.PreActivateAdditional();
     }
