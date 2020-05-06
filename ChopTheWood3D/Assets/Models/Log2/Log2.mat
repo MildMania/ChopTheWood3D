@@ -8,8 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Log2
-  m_Shader: {fileID: -6465566751694194690, guid: fdd742cfd52e349a69144046ba78f6ca,
-    type: 3}
+  m_Shader: {fileID: 4800000, guid: 7be76fe8b4be9764a97bb9af2f48474f, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
@@ -49,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9d21bb541feca453988080e0997e837a, type: 3}
+        m_Texture: {fileID: 2800000, guid: c5f8a2c819033485dafb655bf2873279, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -58,6 +57,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PieceMask:
+        m_Texture: {fileID: 2800000, guid: 9e515c5217f83db4fbc01c8c42967f4b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -77,6 +80,7 @@ Material:
     - Vector1_C84DBC0B: 1
     - Vector1_E8306355: 0
     - _AlphaClip: 0
+    - _AlphaCutoff: 0.5
     - _AlphaMaskCoef: 0
     - _Blend: 0
     - _BlueMaskCoef: 0
@@ -85,6 +89,7 @@ Material:
     - _Cutoff: 0.5
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _Float0: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -110,9 +115,12 @@ Material:
     - Vector2_E49A4C52: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    - _Emission: {r: 0.404, g: 0.16321602, b: 0.16321602, a: 0}
     - _EmissionColor: {r: 0.2264151, g: 0.08437166, b: 0.08437166, a: 1}
-    - _MaskColor: {r: 0.118403435, g: 1, b: 0, a: 1}
+    - _MaskColor: {r: 0.5316013, g: 0.8490566, b: 0.33241364, a: 1}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
     - _TintColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1985065716849429543
 MonoBehaviour:
