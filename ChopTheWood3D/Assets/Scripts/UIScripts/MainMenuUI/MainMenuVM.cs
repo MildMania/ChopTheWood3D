@@ -1,38 +1,44 @@
-﻿using UnityEngine;
-
-public class MainMenuVM : VMBase
+﻿public class MainMenuVM : VMBase
 {
-    //private MainMenuPhase _mainMenuPhase;
+    private MainMenuPhase _mainMenuPhase;
 
     public MainMenuVM()
     {
         PhaseBaseNode.OnTraverseStarted_Static += OnPhaseTraverseStarted;
+        PhaseBaseNode.OnTraverseFinished_Static += OnPhaseTraverseFinished;
+
         HUDVM.OnPausePressed += OnPausePressed;
     }
 
     protected override void DisposeCustomActions()
     {
         PhaseBaseNode.OnTraverseStarted_Static -= OnPhaseTraverseStarted;
+        PhaseBaseNode.OnTraverseFinished_Static -= OnPhaseTraverseFinished;
+
         HUDVM.OnPausePressed -= OnPausePressed;
     }
 
-    private void OnPhaseTraverseStarted(PhaseBaseNode phaseBaseNode)
+    private void OnPhaseTraverseStarted(PhaseBaseNode phase)
     {
-        //if (phaseBaseNode is MainMenuPhase)
-        //{
-        //    _mainMenuPhase = (MainMenuPhase)phaseBaseNode;
+        if (!(phase is MainMenuPhase))
+            return;
 
-        //    if (UIMenuManager.Instance.IsMainMenuFirstOpenOccured)
-        //        _mainMenuPhase.CompleteTraverse();
-        //    else
-        //        ActivateUI();
-        //}
-        //else
-        //{
-        //    _mainMenuPhase = null;
+        _mainMenuPhase = (MainMenuPhase)phase;
 
-        //    DeactivateUI();
-        //}
+        if (UIMenuManager.Instance.IsMainMenuFirstOpenOccured)
+            _mainMenuPhase.CompleteTraverse();
+        else
+            ActivateUI();
+    }
+
+    private void OnPhaseTraverseFinished(PhaseBaseNode phase)
+    {
+        if (!(phase is MainMenuPhase))
+            return;
+
+        _mainMenuPhase = null;
+
+        DeactivateUI();
     }
 
     private void OnPausePressed()
@@ -67,14 +73,14 @@ public class MainMenuVM : VMBase
 
     public void PlayPressed()
     {
-        //if(UIMenuManager.Instance.IsMainMenuFirstOpenOccured)
-        //    DeactivateUI();            
-        //else
-        //{
-        //    UIMenuManager.Instance.IsMainMenuFirstOpenOccured = true;
+        if (UIMenuManager.Instance.IsMainMenuFirstOpenOccured)
+            DeactivateUI();
+        else
+        {
+            UIMenuManager.Instance.IsMainMenuFirstOpenOccured = true;
 
-        //    _mainMenuPhase.CompleteTraverse();
-        //}
+            _mainMenuPhase.CompleteTraverse();
+        }
     }
 
     public IPLDBase GetTotalCoinPLD()
