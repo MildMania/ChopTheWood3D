@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 493539541384031687}
   - component: {fileID: 493539541384031686}
   - component: {fileID: 4768542490756015028}
+  - component: {fileID: 4501607325398685365}
   - component: {fileID: 8010440279357086972}
   - component: {fileID: 8603077524638874938}
   - component: {fileID: 2793953379467540121}
@@ -66,8 +67,27 @@ MonoBehaviour:
   _renderers:
   - {fileID: 0}
   - {fileID: 0}
+  _failEffect: {fileID: 19800000, guid: 54de83b2f6344584c9349a044aa598fa, type: 3}
   _pieceChopColor: {r: 1, g: 0.97164285, b: 0, a: 0}
   _choppableChopColor: {r: 0.24372888, g: 1, b: 0, a: 0}
+--- !u!114 &4501607325398685365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493539541384031681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80bebd5edc42ad4baedbc7524fd4b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderers: []
+  _cartoonCutEffect: {fileID: 19800004, guid: 9524c66db7b74ca40b32d25d031a4263, type: 3}
+  _cutDebrisEffect: {fileID: 198873518947433100, guid: c4283401a5094a74094432f3f12bda58,
+    type: 3}
+  _delay: 1.5
+  _duration: 2
 --- !u!114 &8010440279357086972
 MonoBehaviour:
   m_ObjectHideFlags: 0

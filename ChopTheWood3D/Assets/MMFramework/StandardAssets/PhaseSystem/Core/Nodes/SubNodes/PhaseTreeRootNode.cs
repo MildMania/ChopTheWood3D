@@ -6,19 +6,17 @@
         : base(id)
     {
         _rootNode = rootNode;
+
+        _rootNode.OnTraverseFinished += OnRootNodeTraversed;
     }
 
     protected override void TraverseNode()
     {
-        _rootNode.OnTraverseFinished += OnRootNodeTraversed;
-
         _rootNode.Traverse();
     }
 
     void OnRootNodeTraversed(PhaseBaseNode n)
     {
-        n.OnTraverseFinished -= OnRootNodeTraversed;
-
         TraverseCompleted();
     }
 }

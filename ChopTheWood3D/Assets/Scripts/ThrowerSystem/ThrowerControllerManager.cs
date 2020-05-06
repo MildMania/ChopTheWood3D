@@ -101,7 +101,7 @@ public class ThrowerControllerManager : MonoBehaviour
 
     private void CheckAnyThrowPhaseLeft()
     {
-        if (_throwPhaseIndex > _throwPhaseInfoArr.Length)
+        if (_throwPhaseIndex == _throwPhaseInfoArr.Length)
             AnyThrowPhaseLeft = false;
         else
             AnyThrowPhaseLeft = true;
