@@ -4,6 +4,8 @@ using UnityEngine;
 public class CutterChopperVisualReactor : ChopperReactorBase<CutterChopController>
 {
     [SerializeField] private Renderer[] _renderers;
+    [SerializeField] private ParticleSystem _cartoonCutEffect;
+    [SerializeField] private ParticleSystem _cutDebrisEffect;
     [SerializeField] private float _delay;
     [SerializeField] private float _duration;
 
@@ -30,7 +32,17 @@ public class CutterChopperVisualReactor : ChopperReactorBase<CutterChopControlle
 
     public override void ChoppedChoppable(ChopControllerBase chopController)
     {
+        InstantiateAndPlayParticle(_cartoonCutEffect);
+        InstantiateAndPlayParticle(_cutDebrisEffect);
+
         FadeOutPieces();
+    }
+
+    private void InstantiateAndPlayParticle(ParticleSystem particle)
+    {
+        ParticleSystem effectInstance = Instantiate(particle);
+        effectInstance.transform.position = transform.position;
+        effectInstance.Play();
     }
 
     private void FadeOutPieces()

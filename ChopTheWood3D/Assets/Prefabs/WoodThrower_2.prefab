@@ -686,16 +686,6 @@ PrefabInstance:
       propertyPath: _renderers.Array.data[3]
       value: 
       objectReference: {fileID: 6217907353428132899}
-    - target: {fileID: 166521768944633898, guid: 3180119a0b0c95b4eafc3e249207d6c4,
-        type: 3}
-      propertyPath: _duration
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 166521768944633898, guid: 3180119a0b0c95b4eafc3e249207d6c4,
-        type: 3}
-      propertyPath: _delay
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 4246350399720797017, guid: 3180119a0b0c95b4eafc3e249207d6c4,
         type: 3}
       propertyPath: _pieces.Array.size
