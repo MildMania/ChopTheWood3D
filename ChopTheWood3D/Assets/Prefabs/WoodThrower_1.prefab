@@ -275,6 +275,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4246350399720797016, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4246350399720797017, guid: 3180119a0b0c95b4eafc3e249207d6c4,
         type: 3}
       propertyPath: _pieces.Array.size
@@ -370,6 +375,11 @@ PrefabInstance:
       propertyPath: _pieceLogs.Array.data[1]._explosionTransform
       value: 
       objectReference: {fileID: 3003117252988430213}
+    - target: {fileID: 5496489866671884388, guid: 3180119a0b0c95b4eafc3e249207d6c4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.42
+      objectReference: {fileID: 0}
     - target: {fileID: 9086630761093774635, guid: 3180119a0b0c95b4eafc3e249207d6c4,
         type: 3}
       propertyPath: _renderers.Array.data[0]
@@ -434,7 +444,7 @@ PrefabInstance:
     - target: {fileID: 3695408294387101786, guid: 0ed944def4f534cfa989517280bde509,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.42
       objectReference: {fileID: 0}
     - target: {fileID: 3695408294387101786, guid: 0ed944def4f534cfa989517280bde509,
         type: 3}
