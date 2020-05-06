@@ -67,11 +67,15 @@ public class ChopperMovementRecorder : MonoBehaviour
     private void OnMovementStarted()
     {
         StartRecordingMovement();
+
+        OnRecordingStarted?.Invoke();
     }
 
     private void OnMovementEnded()
     {
         StopRecordingMovement();
+
+        OnRecordingEnded?.Invoke();
     }
 
     private void StartRecordingMovement()
